@@ -14,9 +14,20 @@
   margin-top: 48px;
 }
 
+button:disabled {
+  background-color: inherit;
+  color: grey;
+  border: 1px solid grey;
+}
+
 .popup__button:hover {
   background: rgba(0, 0, 0, 0.8);
   cursor: pointer;
+}
+
+button:disabled:hover {
+  background-color: inherit;
+  cursor: inherit;
 }
 
 @media screen and (max-width: 568px) {
