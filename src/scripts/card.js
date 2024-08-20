@@ -1,38 +1,88 @@
-const cardsList = document.querySelector('.places__list');
-const cardTemplate = document.querySelector('#card-template').content;
+import { putLikeCard, deleteCard, deleteLikeCard } from './api';
+import { modalConfirmDelete } from './constants';
+import { closeModal, openModal } from './modal';
+import { getUserContext } from './userState';
 
-export function createCard(name, link) {
-  const cardItem = cardTemplate.querySelector('.card').cloneNode(true);
+const cardsList = document.querySelector('.places__list');
+
+function getTemplate() {
+  const template = document
+    .querySelector('#card-template')
+    .content
+    .querySelector('.card')
+    .cloneNode(true);
+
+  return template;
+}
+
+function createCard(card) {
+  const user = getUserContext();
+  
+  const { name, link, owner, _id, likes } = card;
+
+  const cardItem = getTemplate();
   const cardImage = cardItem.querySelector('.card__image');
+  const cardTitle = cardItem.querySelector('.card__title');
+  const cardDeleteButton = cardItem.querySelector('.card__delete-button');
+  const cardLikeButton = cardItem.querySelector('.card__like-button');
+  const cardLikeCounter = cardItem.querySelector('.card__like-counter');
+
+  if (owner._id !== user._id) {
+    cardDeleteButton.remove();
+  }
+
+  if (likes) {
+    cardLikeCounter.textContent = likes.length;
+  }
+
+  if (likes.some(like => like._id === user._id)) {
+    cardLikeButton.classList.add('card__like-button_is-active');
+  }
 
   cardImage.src = link;
   cardImage.alt = name;
-  cardItem.querySelector('.card__title').textContent = name;
+  cardTitle.textContent = name;
+
+  cardDeleteButton.addEventListener('click', () =>  {
+    openModal(modalConfirmDelete);
+
+    const buttonDelete = modalConfirmDelete.querySelector('.popup__button');
+
+    buttonDelete.addEventListener('click', () => {
+      deleteCard(_id)
+        .then(res => res.json())
+        .then(() => {
+          cardsList.removeChild(cardItem);
+        })
+        .catch(err => console.error(err))
+        .finally(() => closeModal());
+    });
+  });
+
+  cardLikeButton.addEventListener('click', () => {
+    if (cardLikeButton.classList.contains('card__like-button_is-active')) {
+      deleteLikeCard(_id)
+        .then(res => res.json())
+        .then((card) => {
+          cardLikeButton.classList.remove('card__like-button_is-active');
+          cardLikeCounter.textContent = card.likes.length;
+        })
+        .catch(err => console.error(err));
+    } else {
+      putLikeCard(_id)
+        .then(res => res.json())
+        .then((card) => {
+          cardLikeButton.classList.add('card__like-button_is-active');
+          cardLikeCounter.textContent = card.likes.length;
+        })
+        .catch(err => console.error(err));
+    }
+  });
 
   return cardItem;
 }
 
-export function handleDeleteCard() {
-  cardsList.addEventListener('click', function(evt) {
-    const target = evt.target;
-
-    if (target.classList.contains('card__delete-button')) {
-      target.closest('.card').remove();
-    }
-  });
-}
-
-export function handleLikeCard() {
-  cardsList.addEventListener('click', function(evt) {
-    const target = evt.target;
-
-    if (target.classList.contains('card__like-button')) {
-      target.classList.toggle('card__like-button_is-active');
-    }
-  });
-}
-
-export function handleOpenImage() {
+function handleOpenImage() {
   const modalWithImg = document.querySelector('.popup_type_image');
   const captionImage = modalWithImg.querySelector('.popup__caption');
   const popupImage = modalWithImg.querySelector('.popup__image')
@@ -41,7 +91,9 @@ export function handleOpenImage() {
     if (evt.target.classList.contains('card__image')) {
       popupImage.src = evt.target.src;
       captionImage.textContent = evt.target.alt;
-      modalWithImg.classList.add('popup_is-opened');
+      openModal(modalWithImg);
     }
   })
 }
+
+export { createCard, handleOpenImage };
