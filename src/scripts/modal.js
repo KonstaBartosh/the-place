@@ -1,41 +1,33 @@
+import {
+  SAVE_BUTTON_LOADING_TEXT,
+  SAVE_BUTTON_DEFAULT_TEXT,
+  MODAL_OPENED_CLASS,
+} from "./constants";
+
 function openModal(modal) {
-  modal.classList.add('popup_is-opened');
-  document.addEventListener('keydown', closeByEscape);
-  document.addEventListener('click', closeByOverlayClick);
+  modal.classList.add(MODAL_OPENED_CLASS);
+  document.addEventListener("click", closeModalByEvent);
+  document.addEventListener("keydown", closeModalByEvent);
 }
 
-function closeModal() {
-  const openPopup = document.querySelector('.popup_is-opened');
-
-  openPopup.classList.remove('popup_is-opened');
-  document.removeEventListener('keydown', closeByEscape);
-  document.removeEventListener('click', closeByOverlayClick);
+function closeModal(modal) {
+  modal.classList.remove(MODAL_OPENED_CLASS);
+  document.removeEventListener("click", closeModalByEvent);
+  document.removeEventListener("keydown", closeModalByEvent);
 }
 
-function closeByEscape(evt) {
-  const openPopup = document.querySelector('.popup_is-opened');
+function closeModalByEvent(e) {
+  const popupIsOpen = document.querySelector(`.${MODAL_OPENED_CLASS}`);
 
-  if (openPopup && evt.key === 'Escape') {
-    openPopup.classList.remove('popup_is-opened');
+  if (e.key === "Escape" || e.target === popupIsOpen) {
+    closeModal(popupIsOpen);
   }
 }
 
-function closeByOverlayClick(evt) {
-  const openPopup = document.querySelector('.popup_is-opened');
+function renderLoading(modal, isLoading) {
+  const button = modal.querySelector(".popup__button");
 
-  if (evt.target === openPopup) {
-    openPopup.classList.remove('popup_is-opened');
-  }
-}
-
-function renderLoading(modal,isLoading) {
-  const button = modal.querySelector('.popup__button');
-
-  if (isLoading) {
-    button.textContent = 'Загрузка...';
-  } else {
-    button.textContent = 'Сохранить';
-  }
+  button.textContent = isLoading ? SAVE_BUTTON_LOADING_TEXT : SAVE_BUTTON_DEFAULT_TEXT;
 }
 
 export { openModal, closeModal, renderLoading };
