@@ -23,6 +23,8 @@ import {
   avatarInput,
   modalEditAvatar,
   avatarElement,
+  popups,
+  allModals,
 } from "./scripts/constants";
 
 async function loadData() {
@@ -127,24 +129,25 @@ handleOpenImage();
 
 buttonEditProfile.addEventListener('click', () => {
   openModal(modalEditProfile)
-  clearValidation(formProfile);
 });
 
 buttonEditUserpic.addEventListener('click', () => {
   openModal(modalEditAvatar)
-  clearValidation(formEditAvatar);
 });
 
 buttonNewCard.addEventListener('click', () => {
   openModal(modalNewCard);
-  clearValidation(formNewCard);
   formNewCard.reset();
 });
 
-document.addEventListener('click', (evt) => {
-  if (evt.target.matches('.popup__close')) {
-    closeModal();
-  }
+
+allModals.forEach(modal => {
+  modal.addEventListener('click', (evt) => {
+    if (evt.target.matches('.popup__close')) {
+      closeModal(modal);
+      clearValidation(modal);
+    }
+  });
 });
 
 formProfile.addEventListener('submit', handleUpdateProfile);
