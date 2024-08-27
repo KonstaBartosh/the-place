@@ -17,7 +17,7 @@ function fetchCards() {
 function fetchUser() {
   return fetch(apiConfig.baseUrl + '/users/me', {
     headers: apiConfig.headers
-  });
+  })
 }
 
 function updateUser(name, about) {
@@ -28,7 +28,8 @@ function updateUser(name, about) {
       name: name,
       about: about
     })
-  });
+  })
+  .then(checkResponse)
 }
 
 function updateAvatar(link) {
@@ -39,6 +40,7 @@ function updateAvatar(link) {
       avatar: link
     })
   })
+  .then(checkResponse)
 }
 
 function postCard(name, link) {
@@ -49,7 +51,8 @@ function postCard(name, link) {
       name: name,
       link: link
     })
-  });
+  })
+  .then(checkResponse)
 }
 
 function deleteCard(id) {

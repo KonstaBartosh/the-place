@@ -62,10 +62,7 @@ function setUserData(user) {
 }
 
 function renderCards(cards) {
-  cards.forEach(card => {
-    const cardItem = createCard(card);
-    cardsList.append(cardItem);
-  });
+  cards.forEach(card => cardsList.append(createCard(card)));
 }
 
 function handleUpdateProfile(evt) {
@@ -74,7 +71,6 @@ function handleUpdateProfile(evt) {
   renderLoading(formProfile,true);
 
   updateUser(nameInput.value, aboutInput.value)
-    .then(res => res.json())
     .then(user => {
       nameElement.textContent = user.name;
       aboutElement.textContent = user.about;
@@ -93,7 +89,6 @@ function handleUpdateAvatar(evt) {
   renderLoading(formEditAvatar, true);
 
   updateAvatar(avatarInput.value)
-    .then(res => res.json())
     .then(user => avatarElement.src = user.avatar)
     .catch(err => console.error(err))
     .finally(() => {
@@ -110,7 +105,6 @@ function handleSubmitCard(evt) {
 
   renderLoading(formNewCard,true);
   postCard(name, link)
-    .then(res => res.json())
     .then((сard) => {
         cardsList.prepend(createCard(сard));
       })
