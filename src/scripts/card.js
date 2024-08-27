@@ -1,5 +1,5 @@
 import { deleteCard, handleLikeCard } from './api';
-import { modalConfirmDelete } from './constants';
+import { activeLikeSelector, modalConfirmDelete } from './constants';
 import { closeModal, openModal } from './modal';
 import { getUserContext } from './userState';
 
@@ -27,6 +27,10 @@ function createCard(card) {
   const cardLikeButton = cardItem.querySelector('.card__like-button');
   const cardLikeCounter = cardItem.querySelector('.card__like-counter');
 
+  cardImage.src = link;
+  cardImage.alt = name;
+  cardTitle.textContent = name;
+
   if (owner._id !== user._id) {
     cardDeleteButton.remove();
   }
@@ -36,12 +40,8 @@ function createCard(card) {
   }
 
   if (likes.some(like => like._id === user._id)) {
-    cardLikeButton.classList.add('card__like-button_is-active');
+    cardLikeButton.classList.add(activeLikeSelector);
   }
-
-  cardImage.src = link;
-  cardImage.alt = name;
-  cardTitle.textContent = name;
 
   if (cardDeleteButton) {
     cardDeleteButton.addEventListener('click', () =>  {
@@ -51,30 +51,26 @@ function createCard(card) {
 
       buttonDelete.addEventListener('click', () => {
         deleteCard(_id)
-          .then(res => res.json())
-          .then(() => {
-            cardsList.removeChild(cardItem);
-          })
+          .then(() => cardsList.removeChild(cardItem))
           .catch(err => console.error(err))
-          .finally(() => closeModal());
+          .finally(() => closeModal(modalConfirmDelete));
       });
     });
   }
 
   if (cardLikeButton) {
     cardLikeButton.addEventListener('click', () => {
-      const isLiked = cardLikeButton.classList.contains('card__like-button_is-active')
+      const isLiked = cardLikeButton.classList.contains(activeLikeSelector)
 
       handleLikeCard(_id, isLiked)
-        .then(res => res.json())
         .then(card => {
-          cardLikeButton.classList.toggle('card__like-button_is-active');
+          cardLikeButton.classList.toggle(activeLikeSelector);
           cardLikeCounter.textContent = card.likes.length;
         })
         .catch(err => console.error(err))
     })
   }
-
+  
   return cardItem;
 }
 
