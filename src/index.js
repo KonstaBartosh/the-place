@@ -112,8 +112,7 @@ function handleSubmitCard(evt) {
   postCard(name, link)
     .then(res => res.json())
     .then((сard) => {
-        const cardItem = createCard(сard);
-        cardsList.prepend(cardItem);
+        cardsList.prepend(createCard(сard));
       })
     .catch(err => console.error(err))
     .finally(() => {
