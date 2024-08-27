@@ -8,6 +8,7 @@
   const SAVE_BUTTON_LOADING_TEXT = 'Сохранение...';
   const SAVE_BUTTON_DEFAULT_TEXT = 'Сохранить';
   const MODAL_OPENED_CLASS = 'popup_is-opened';
+  const activeLikeSelector = 'card__like-button_is-active';
   const allModals = document.querySelectorAll('.popup');
   const modalConfirmDelete = document.querySelector(".popup_type_confirm-delete");
   const modalNewCard = document.querySelector(".popup_type_new-card");
@@ -46,6 +47,7 @@
     buttonNewCard,
     buttonEditUserpic,
     buttonEditProfile,
+    activeLikeSelector,
     formProfile,
     formNewCard,
     formEditAvatar,
