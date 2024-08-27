@@ -65,7 +65,7 @@ function renderCards(cards) {
   cards.forEach(card => cardsList.append(createCard(card)));
 }
 
-function handleUpdateProfile(evt) {
+function handleEditProfile(evt) {
   evt.preventDefault();
 
   renderLoading(formProfile,true);
@@ -79,7 +79,7 @@ function handleUpdateProfile(evt) {
     .finally(() => {
       console.log('finally');
       renderLoading(formProfile, false);
-      closeModal();
+      closeModal(modalEditProfile);
     });
 }
 
@@ -93,7 +93,7 @@ function handleUpdateAvatar(evt) {
     .catch(err => console.error(err))
     .finally(() => {
       renderLoading(formEditAvatar, false);
-      closeModal();
+      closeModal(modalEditAvatar);
     })
 }
 
@@ -111,7 +111,7 @@ function handleSubmitCard(evt) {
     .catch(err => console.error(err))
     .finally(() => {
       renderLoading(formNewCard, false);
-      closeModal();
+      closeModal(modalNewCard);
       formNewCard.reset();
       toggleButtonState(formNewCard);
     });
@@ -143,6 +143,6 @@ allModals.forEach(modal => {
   });
 });
 
-formProfile.addEventListener('submit', handleUpdateProfile);
+formProfile.addEventListener('submit', handleEditProfile);
 formEditAvatar.addEventListener('submit', handleUpdateAvatar);
 formNewCard.addEventListener('submit', handleSubmitCard);
