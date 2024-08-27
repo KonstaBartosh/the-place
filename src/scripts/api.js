@@ -1,5 +1,13 @@
 import { apiConfig } from './constants';
 
+function checkResponse(res) {
+  if (!res.ok) {
+    throw new Error (`Ошибка: ${res.status}`)
+  }
+
+  return res.json();
+}
+
 function fetchCards() {
   return fetch(apiConfig.baseUrl + '/cards', {
     headers: apiConfig.headers
@@ -48,14 +56,16 @@ function deleteCard(id) {
   return fetch(`${apiConfig.baseUrl}/cards/${id}`, {
     method: 'DELETE',
     headers: apiConfig.headers
-  });
+  })
+  .then(checkResponse)
 }
 
 function handleLikeCard(id, isLiked) {
   return fetch(`${apiConfig.baseUrl}/cards/likes/${id}`, {
     method: isLiked ? 'DELETE' : 'PUT',
     headers: apiConfig.headers
-  });
+  })
+  .then(checkResponse)
 }
 
 export {
