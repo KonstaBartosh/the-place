@@ -43,41 +43,45 @@ function createCard(card) {
   cardImage.alt = name;
   cardTitle.textContent = name;
 
-  cardDeleteButton.addEventListener('click', () =>  {
-    openModal(modalConfirmDelete);
+  if (cardDeleteButton) {
+    cardDeleteButton.addEventListener('click', () =>  {
+      openModal(modalConfirmDelete);
 
-    const buttonDelete = modalConfirmDelete.querySelector('.popup__button');
+      const buttonDelete = modalConfirmDelete.querySelector('.popup__button');
 
-    buttonDelete.addEventListener('click', () => {
-      deleteCard(_id)
-        .then(res => res.json())
-        .then(() => {
-          cardsList.removeChild(cardItem);
-        })
-        .catch(err => console.error(err))
-        .finally(() => closeModal());
+      buttonDelete.addEventListener('click', () => {
+        deleteCard(_id)
+          .then(res => res.json())
+          .then(() => {
+            cardsList.removeChild(cardItem);
+          })
+          .catch(err => console.error(err))
+          .finally(() => closeModal());
+      });
     });
-  });
+  }
 
-  cardLikeButton.addEventListener('click', () => {
-    if (cardLikeButton.classList.contains('card__like-button_is-active')) {
-      deleteLikeCard(_id)
-        .then(res => res.json())
-        .then((card) => {
-          cardLikeButton.classList.remove('card__like-button_is-active');
-          cardLikeCounter.textContent = card.likes.length;
-        })
-        .catch(err => console.error(err));
-    } else {
-      putLikeCard(_id)
-        .then(res => res.json())
-        .then((card) => {
-          cardLikeButton.classList.add('card__like-button_is-active');
-          cardLikeCounter.textContent = card.likes.length;
-        })
-        .catch(err => console.error(err));
-    }
-  });
+  if (cardLikeButton) {
+    cardLikeButton.addEventListener('click', () => {
+      if (cardLikeButton.classList.contains('card__like-button_is-active')) {
+        deleteLikeCard(_id)
+          .then(res => res.json())
+          .then((card) => {
+            cardLikeButton.classList.remove('card__like-button_is-active');
+            cardLikeCounter.textContent = card.likes.length;
+          })
+          .catch(err => console.error(err));
+      } else {
+        putLikeCard(_id)
+          .then(res => res.json())
+          .then((card) => {
+            cardLikeButton.classList.add('card__like-button_is-active');
+            cardLikeCounter.textContent = card.likes.length;
+          })
+          .catch(err => console.error(err));
+      }
+    });
+  }
 
   return cardItem;
 }
