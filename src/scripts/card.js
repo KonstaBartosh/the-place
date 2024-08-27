@@ -20,58 +20,63 @@ function createCard(card) {
   
   const { name, link, owner, _id, likes } = card;
 
-  const cardItem = getTemplate();
-  const cardImage = cardItem.querySelector('.card__image');
-  const cardTitle = cardItem.querySelector('.card__title');
-  const cardDeleteButton = cardItem.querySelector('.card__delete-button');
-  const cardLikeButton = cardItem.querySelector('.card__like-button');
-  const cardLikeCounter = cardItem.querySelector('.card__like-counter');
+  const cardElement = getTemplate();
+  const cardImage = cardElement.querySelector('.card__image');
+  const cardTitle = cardElement.querySelector('.card__title');
+  const buttonRemove = cardElement.querySelector('.card__delete-button');
+  const buttonLike = cardElement.querySelector('.card__like-button');
+  const likeCounter = cardElement.querySelector('.card__like-counter');
 
   cardImage.src = link;
   cardImage.alt = name;
   cardTitle.textContent = name;
 
+  // showing remove btn icon only when user create it
   if (owner._id !== user._id) {
-    cardDeleteButton.remove();
+    buttonRemove.remove();
   }
 
+  // showing ammount of likes
   if (likes) {
-    cardLikeCounter.textContent = likes.length;
+    likeCounter.textContent = likes.length;
   }
 
+  // showing like btn icon only when user put it
   if (likes.some(like => like._id === user._id)) {
-    cardLikeButton.classList.add(activeLikeSelector);
+    buttonLike.classList.add(activeLikeSelector);
   }
 
-  if (cardDeleteButton) {
-    cardDeleteButton.addEventListener('click', () =>  {
+  // removing card
+  if (buttonRemove) {
+    buttonRemove.addEventListener('click', () =>  {
       openModal(modalConfirmDelete);
 
       const buttonDelete = modalConfirmDelete.querySelector('.popup__button');
 
       buttonDelete.addEventListener('click', () => {
         deleteCard(_id)
-          .then(() => cardsList.removeChild(cardItem))
+          .then(() => cardsList.removeChild(cardElement))
           .catch(err => console.error(err))
           .finally(() => closeModal(modalConfirmDelete));
       });
     });
   }
 
-  if (cardLikeButton) {
-    cardLikeButton.addEventListener('click', () => {
-      const isLiked = cardLikeButton.classList.contains(activeLikeSelector)
+  // likes handler
+  if (buttonLike) {
+    buttonLike.addEventListener('click', () => {
+      const isLiked = buttonLike.classList.contains(activeLikeSelector)
 
       handleLikeCard(_id, isLiked)
         .then(card => {
-          cardLikeButton.classList.toggle(activeLikeSelector);
-          cardLikeCounter.textContent = card.likes.length;
+          buttonLike.classList.toggle(activeLikeSelector);
+          likeCounter.textContent = card.likes.length;
         })
         .catch(err => console.error(err))
     })
   }
   
-  return cardItem;
+  return cardElement;
 }
 
 function handleOpenImage() {
