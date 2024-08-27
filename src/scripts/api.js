@@ -51,16 +51,9 @@ function deleteCard(id) {
   });
 }
 
-function putLikeCard(id) {
+function handleLikeCard(id, isLiked) {
   return fetch(`${apiConfig.baseUrl}/cards/likes/${id}`, {
-    method: 'PUT',
-    headers: apiConfig.headers
-  });
-}
-
-function deleteLikeCard(id) {
-  return fetch(`${apiConfig.baseUrl}/cards/likes/${id}`, {
-    method: 'DELETE',
+    method: isLiked ? 'DELETE' : 'PUT',
     headers: apiConfig.headers
   });
 }
@@ -72,6 +65,5 @@ export {
   updateAvatar,
   postCard,
   deleteCard,
-  putLikeCard,
-  deleteLikeCard,
+  handleLikeCard
 };

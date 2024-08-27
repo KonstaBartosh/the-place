@@ -1,4 +1,4 @@
-import { putLikeCard, deleteCard, deleteLikeCard } from './api';
+import { deleteCard, handleLikeCard } from './api';
 import { modalConfirmDelete } from './constants';
 import { closeModal, openModal } from './modal';
 import { getUserContext } from './userState';
@@ -63,24 +63,16 @@ function createCard(card) {
 
   if (cardLikeButton) {
     cardLikeButton.addEventListener('click', () => {
-      if (cardLikeButton.classList.contains('card__like-button_is-active')) {
-        deleteLikeCard(_id)
-          .then(res => res.json())
-          .then((card) => {
-            cardLikeButton.classList.remove('card__like-button_is-active');
-            cardLikeCounter.textContent = card.likes.length;
-          })
-          .catch(err => console.error(err));
-      } else {
-        putLikeCard(_id)
-          .then(res => res.json())
-          .then((card) => {
-            cardLikeButton.classList.add('card__like-button_is-active');
-            cardLikeCounter.textContent = card.likes.length;
-          })
-          .catch(err => console.error(err));
-      }
-    });
+      const isLiked = cardLikeButton.classList.contains('card__like-button_is-active')
+
+      handleLikeCard(_id, isLiked)
+        .then(res => res.json())
+        .then(card => {
+          cardLikeButton.classList.toggle('card__like-button_is-active');
+          cardLikeCounter.textContent = card.likes.length;
+        })
+        .catch(err => console.error(err))
+    })
   }
 
   return cardItem;
