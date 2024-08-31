@@ -1,7 +1,8 @@
 import './Header.css'
 import reactLogo from '../../assets/react.svg'
+import React from 'react';
 
-const Header = () => {
+const Header = (): React.ReactElement => {
   return (
     <header className="header">
       <img
