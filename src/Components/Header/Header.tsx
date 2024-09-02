@@ -1,16 +1,9 @@
-import './Header.css'
-import reactLogo from '../../assets/react.svg'
-import React from 'react';
+import styles from './Header.module.css';
 
 const Header = (): React.ReactElement => {
   return (
-    <header className="header">
-      <img
-        className="logo"
-        src={reactLogo}
-        alt="Логотип проекта место"
-        />
-      <h1>The Place</h1>
+    <header className={styles.container}>
+      <h1 className={styles.title}>The Place</h1>
     </header>
   );
 };
