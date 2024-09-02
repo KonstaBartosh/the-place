@@ -1,11 +1,13 @@
-import './Footer.css';
+import styles from './Footer.module.css';
 
 const Footer = (): React.ReactElement => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="footer">
-      <p className="footer__copyright">{year} The Place</p>
+    <footer className={styles.container}>
+      <p className={styles.copyright}>
+        &copy; {year} The Place. All rights reserved.
+      </p>
     </footer>
   );
 };
