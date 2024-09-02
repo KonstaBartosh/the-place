@@ -5,7 +5,7 @@ type TCard = {
 }
 
 type TUser = {
-  _id: string;
+  _id?: string;
   name: string;
   avatar: string;
   about: string;
