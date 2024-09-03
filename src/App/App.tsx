@@ -10,9 +10,12 @@ import { TCard, TUser } from '../Shared/Types/common';
 
 function App() {
   const [cards, setCards] = useState<TCard[]>([]);
-  const [user, setUser] = useState<TUser | undefined>(undefined);
+  const [user, setUser] = useState<TUser | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
+    
     const getData = async () => {
       try {
         const [userRes, cardsRes] = await Promise.all([
@@ -26,8 +29,10 @@ function App() {
         setUser(user);
         setCards(cards);
 
-      } catch (err) {
-        console.error('Ошибка!', err)
+      } catch (err: any) {
+        console.error('Ошибка!', err);
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -40,8 +45,8 @@ function App() {
     <>
       <Header />
       <main style={{ flexGrow: 1}}>
-        <Profile />
-        <CardsLayout cards={cards} />
+        <Profile user={user} isLoading={isLoading} />
+        <CardsLayout cards={cards} isLoading={isLoading} />
       </main>
       <Footer />
     </>
