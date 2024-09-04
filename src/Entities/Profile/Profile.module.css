@@ -1,0 +1,208 @@
+.container {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 36px 0;
+}
+
+.title {
+  font-size: 42px;
+  line-height: 48px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  grid-area: title;
+  margin: 0;
+}
+
+.dataWrapper {
+  display: grid;
+  grid-template-areas: "title button"
+  "description description";
+  grid-gap: 9px 17px;
+}
+
+.occupation {
+  font-size: 18px;
+  line-height: 22px;
+  grid-area: description;
+  margin: 0;
+}
+
+.imageWrapper {
+  position: relative;
+  margin-right: 30px;
+}
+
+.image {
+  width: 120px;
+  height: 120px;
+  background-color: whitesmoke;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: .3s ease;
+  background-color: black;
+}
+
+.imageWrapper:hover .overlay {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.overlayContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25px;
+  height: 25px;
+  background-image: url(../../Icons/edit-icon.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.editButton {
+  width: 24px;
+  height: 24px;
+  background: transparent url('../../Icons/edit-icon-light.svg') center no-repeat;
+  background-size: 10px 10px;
+  border: 1px solid #fff;
+  grid-area: button;
+  align-self: center;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  padding: 0;
+  margin: 0;
+}
+
+.editButton:hover {
+  opacity: 0.6;
+}
+
+.addButton {
+  width: 150px;
+  height: 50px;
+  background: transparent url("../../Icons/add-icon-light.svg") center no-repeat;
+  background-size: 22px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: 2px solid #fff;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.addButton:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 740px) {
+  .title {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .dataWrapper {
+    grid-template-columns: minmax(auto, 228px) auto;
+    grid-gap: 9px 5px;
+  }
+
+  .image {
+    margin: 0 10px 0 0;
+  }
+
+  .addButton {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .title {
+    font-size: 27px;
+    line-height: 33px;
+  }
+
+  .dataWrapper {
+    grid-template-columns: minmax(auto, 195px) auto;
+  }
+
+  .occupation {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 43px 0;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .title {
+    min-width: 201px;
+  }
+
+  .dataWrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 26px 0 33px 0;
+  }
+
+  .occupation {
+    width: 100%;
+    margin: 7px 0 0 0;
+  }
+
+  .image {
+    margin-right: 0;
+  }
+
+  .addButton {
+    width: 100%;
+  }
+
+  .editButton {
+    width: 18px;
+    height: 18px;
+    background-size: 8px 8px;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .title, .occupation {
+    color: #213547;
+  }
+  .addButton, .editButton {
+    border-color: #213547;
+  }
+  .addButton {
+    background-image: url("../../Icons/add-icon.svg");
+  }
+  .editButton {
+    background-image: url("../../Icons/edit-icon.svg");
+  }
+}
