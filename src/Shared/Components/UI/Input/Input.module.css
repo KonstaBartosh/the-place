@@ -17,11 +17,11 @@
   margin-bottom: 0;
 }
 
-.input-error-active {
+.errorActive {
   border-bottom-color: red;
 }
 
-.input-error-text {
+.errorText {
   display: none;
   color: red;
   font-size: 12px;
