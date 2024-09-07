@@ -6,6 +6,7 @@ type TInputProps = {
   placeholder?: string;
   defaultValue?: string;
   register: any;
+  message?: string | undefined;
 };
 
 const Input = ({
@@ -14,16 +15,20 @@ const Input = ({
   placeholder,
   defaultValue,
   register,
+  message
 }: TInputProps) => {
 
   return(
-    <input 
-      className={styles.input}
-      placeholder={placeholder}
-      defaultValue={defaultValue}
-      type={type}
-      {...register(name)}
-    />
+    <>
+      <input 
+        className={styles.input}
+        placeholder={placeholder}
+        defaultValue={defaultValue}
+        type={type}
+        {...register(name)}
+      />
+      <span className={styles.errorText}>{message}</span>
+    </>
   )
 }
 
