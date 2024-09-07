@@ -6,11 +6,11 @@ import ProfileSkeleton from "./ProfileSkeleton";
 import ProfileModal from "./Modals/ProfileModal";
 import AvatarModal from "./Modals/AvatarModal";
 
-type TProps = {
+type TPops = {
   isLoading?: boolean;
 };
 
-const Profile = ({ isLoading }: TProps) => {
+const Profile = ({ isLoading }: TPops) => {
   const [profileIsOpen, setProfileOpen] = useState(false);
   const [userIsOpen, setUserOpen] = useState(false);
 
