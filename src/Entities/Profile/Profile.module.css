@@ -53,6 +53,7 @@
   opacity: 0;
   transition: .3s ease;
   background-color: black;
+  border-radius: 50%;
 }
 
 .imageWrapper:hover .overlay {
@@ -67,7 +68,7 @@
   transform: translate(-50%, -50%);
   width: 25px;
   height: 25px;
-  background-image: url(../../Icons/edit-icon.svg);
+  background-image: url(../../Shared/Icons/edit-icon-light.svg);
   background-size: contain;
   background-repeat: no-repeat;
 }
