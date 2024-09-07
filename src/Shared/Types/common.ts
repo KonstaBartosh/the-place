@@ -6,9 +6,9 @@ type TCard = {
 
 type TUser = {
   _id?: string;
-  name: string;
-  avatar: string;
-  about: string;
+  name?: string;
+  avatar?: string;
+  about?: string;
 }
 
 export type { TCard, TUser };
