@@ -1,37 +1,28 @@
 import styles from './Input.module.css';
 
 type TInputProps = {
-  type: string;
   name: string;
+  type: string;
   placeholder?: string;
-  value: string;
-  required?: boolean;
-  minLength?: number;
-  maxLength?: number;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  defaultValue?: string;
+  register: any;
 };
 
 const Input = ({
-  type, 
   name,
-  value, 
-  placeholder, 
-  required, 
-  minLength, 
-  maxLength,
-  onChange
+  type,  
+  placeholder,
+  defaultValue,
+  register,
 }: TInputProps) => {
+
   return(
     <input 
       className={styles.input}
-      type={type}
-      name={name}
-      value={value}
       placeholder={placeholder}
-      minLength={minLength}
-      maxLength={maxLength}
-      required={required}
-      onChange={onChange}
+      defaultValue={defaultValue}
+      type={type}
+      {...register(name)}
     />
   )
 }
