@@ -17,6 +17,8 @@ type TProps = {
 };
 
 const AvatarModal = ({isOpen, onClose}: TProps) => {
+  const MODAL_TITLE = 'Change user picture';
+
   const { user, setUser } = useContext(UserContext);
 
   const {
@@ -51,7 +53,7 @@ const AvatarModal = ({isOpen, onClose}: TProps) => {
 
   return(
     <Modal 
-      title="Обновить аватар"
+      title={MODAL_TITLE}
       isOpen={isOpen}
       onClose={handleClose}
       >

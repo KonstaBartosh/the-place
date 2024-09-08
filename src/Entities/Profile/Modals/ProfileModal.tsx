@@ -18,7 +18,7 @@ type TProps = {
 };
 
 const ProfileModal = ({ isOpen, onClose }: TProps) => {
-  const MODAL_TITLE = "Редактировать профиль";
+  const MODAL_TITLE = "Change user profile";
 
   const { user, setUser } = useContext(UserContext);
 
@@ -54,7 +54,7 @@ const ProfileModal = ({ isOpen, onClose }: TProps) => {
 
   return (
     <Modal title={MODAL_TITLE} isOpen={isOpen} onClose={handleClose}>
-      <form onSubmit={handleSubmit(onSubmit)} style={{ paddingTop: "30px" }}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           name="name"
           type="text"
