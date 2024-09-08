@@ -3,12 +3,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import Modal from "../../../Shared/Components/Modal/Modal";
-import Button from "../../../Shared/Components/UI/Button/Button";
-import Input from "../../../Shared/Components/UI/Input/Input";
+import Button from "../../../Shared/Components/Button/Button";
+import Input from "../../../Shared/Components/Input/Input";
 
-import { postCard } from "../../../Shared/Api/api";
 import { CardsContext } from "../../../Shared/Context/CardsContext";
 import { schema } from "../Validation/Validation";
+import { postCardApi } from "../../Profile/Api/ProfileApi";
 
 type TProps ={
   isOpen: boolean;
@@ -40,7 +40,7 @@ const NewCardModal = ({isOpen, onClose}: TProps) => {
   const onSubmit = async (data: any)  => {
     try {
       const { name, link } = data;
-      const newCard = await postCard(name, link);
+      const newCard = await postCardApi(name, link);
       console.log(newCard);
       setCards([newCard, ...cards]);
       handleClose();
