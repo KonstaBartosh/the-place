@@ -2,12 +2,17 @@ import styles from "./Button.module.css";
 
 type TButtonProps = {
   type: "button" | "submit" | "reset" | undefined;
-  label: string;
+  label?: string;
   disabled?: boolean;
   onClick?: () => void;
 };
 
-const Button = ({ type, label, disabled, onClick }: TButtonProps) => {
+const Button = ({
+  type, 
+  label = 'Save', 
+  disabled, 
+  onClick 
+}: TButtonProps) => {
   return (
     <button
       className={styles.button}

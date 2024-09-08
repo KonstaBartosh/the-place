@@ -66,7 +66,6 @@ const AvatarModal = ({isOpen, onClose}: TProps) => {
         message={errors.avatar?.message}
       />
       <Button
-        label="Сохранить" 
         type="submit" 
         disabled={!isDirty} 
         />

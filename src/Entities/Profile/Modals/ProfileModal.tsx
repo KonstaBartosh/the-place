@@ -69,8 +69,7 @@ const ProfileModal = ({ isOpen, onClose }: TProps) => {
           register={register}
           message={errors.about?.message}
           />
-        <Button 
-          label="Сохранить" 
+        <Button
           type="submit" 
           disabled={!isDirty} 
           />

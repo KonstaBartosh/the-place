@@ -71,7 +71,6 @@ const NewCardModal = ({isOpen, onClose}: TProps) => {
           message={errors.link?.message}
           />
         <Button 
-          label="Создать" 
           type="submit"
           disabled={!isDirty} 
           />
