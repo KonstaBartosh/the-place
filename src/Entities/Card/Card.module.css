@@ -62,7 +62,7 @@
 }
 
 .likeButtonIsActive {
-  background: transparent url('../../Icons/like-active.svg') no-repeat;
+  background: transparent url('../../Shared/Icons/like-active.svg') no-repeat;
 }
 
 .likeCounter {
@@ -74,7 +74,7 @@
 .deleteButton {
   width: 18px;
   height: 18px;
-  background: transparent url('../../Icons/delete-icon.svg') center no-repeat;
+  background: transparent url('../../Shared/Icons/delete-icon.svg') center no-repeat;
   background-size: 18px 18px;
   border: none;
   cursor: pointer;
