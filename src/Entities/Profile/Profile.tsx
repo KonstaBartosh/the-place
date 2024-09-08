@@ -5,6 +5,7 @@ import { UserContext } from "../../Shared/Context/UserContext";
 import ProfileSkeleton from "./ProfileSkeleton";
 import ProfileModal from "./Modals/ProfileModal";
 import AvatarModal from "./Modals/AvatarModal";
+import NewCardModal from "../Card/Modals/NewCard";
 
 type TPops = {
   isLoading?: boolean;
@@ -13,6 +14,7 @@ type TPops = {
 const Profile = ({ isLoading }: TPops) => {
   const [profileIsOpen, setProfileOpen] = useState(false);
   const [userIsOpen, setUserOpen] = useState(false);
+  const [addCardOpen, setAddCardOpen] = useState(false);
 
   const { user } = useContext(UserContext);
 
@@ -47,8 +49,8 @@ const Profile = ({ isLoading }: TPops) => {
           <p className={styles.occupation}>{about}</p>
         </div>
         <button 
-          className={styles.addButton} 
-          type="button" 
+          className={styles.addButton}
+          onClick={() => setAddCardOpen(true)}
           />
       </section>
       <ProfileModal
@@ -58,6 +60,10 @@ const Profile = ({ isLoading }: TPops) => {
       <AvatarModal 
         isOpen={userIsOpen} 
         onClose={() => setUserOpen(false)} 
+        />
+      <NewCardModal 
+        isOpen={addCardOpen} 
+        onClose={() => setAddCardOpen(false)}
         />
     </>
   );
