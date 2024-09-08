@@ -2,6 +2,8 @@ type TCard = {
   _id?: string;
   name: string;
   link: string;
+  likes?: TUser[];
+  owner?: TUser;
 }
 
 type TUser = {
