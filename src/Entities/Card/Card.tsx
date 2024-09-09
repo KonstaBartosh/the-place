@@ -1,18 +1,21 @@
 import styles from "./Card.module.css";
+
 import { useCallback, useContext, useMemo, useState } from "react";
 import { UserContext } from "../../Shared/Context/UserContext";
 import { CardsContext } from "../../Shared/Context/CardsContext";
-import { TCard } from "../../Shared/Types/common";
 import { deleteCardApi, handleLikeApi } from "./Api/CardApi";
-import ImageModal from "./Modals/ImageModal";
+import { TCard } from "../../Shared/Types/common";
+
 import Modal from "../../Shared/Components/Modal/Modal";
 import Button from "../../Shared/Components/Button/Button";
+import ImageModal from "./Modals/ImageModal";
 
 type TProps = {
   card: TCard;
 };
 
 const Card = ({ card }: TProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [isShowModal, setShowModal] = useState(false);
   const [isDeleteModal, setDeleteModal] = useState(false);
 
@@ -22,21 +25,25 @@ const Card = ({ card }: TProps) => {
 
   const { _id, name, link, owner, likes } = card;
 
-
+  // Define if the current user is the owner of the card
   const isUserOwner = useMemo(
     () => owner?._id === user?._id, [owner, user]);
 
+  // Define the number of likes for the card
   const likeCounter = useMemo(
     () => likes?.length || null, [likes]);
 
+  // Define if the current user has liked the card
   const isLiked = useMemo(
     () => likes?.some((like) => like._id === user?._id), [likes, user]);
 
   const handleDelete = useCallback(async () => {
     if (isUserOwner && _id) {
       try {
+        setIsLoading(true);
         await deleteCardApi(_id);
         setCards(cards.filter((item) => item._id !== card._id));
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -54,6 +61,7 @@ const Card = ({ card }: TProps) => {
     }
   }, [_id, isLiked, setCards, cards]);
 
+  // Define the class name for the like button based on the current state
   const likeButtonClass = `${styles.likeButton} ${
     isLiked && styles.likeButtonIsActive
   }`;
@@ -86,11 +94,13 @@ const Card = ({ card }: TProps) => {
         </div>
       </div>
     </article>
+    {/* Display the image modal if the card is being displayed */}
     <ImageModal
         isOpen={isShowModal}
         name={name}
         link={link}
         onClose={() => setShowModal(false)} />
+    {/* Display the delete modal if the card is being displayed */}
     <Modal 
       isOpen={isDeleteModal} 
       title={'Delete card ?'} 
@@ -100,6 +110,8 @@ const Card = ({ card }: TProps) => {
         label="Delete"
         type="button"
         ariaLabel="Delete card"
+        isLoading={isLoading}
+        loadingLabel="Deleting..."
         onClick={() => handleDelete()}
         />
     </Modal>
