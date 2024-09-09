@@ -5,6 +5,8 @@ type TButtonProps = {
   ariaLabel: string;
   label?: string;
   disabled?: boolean;
+  isLoading?: boolean;
+  loadingLabel?: string;
   onClick?: () => void;
 };
 
@@ -12,7 +14,9 @@ const Button = ({
   type,
   ariaLabel,
   label = 'Save', 
+  loadingLabel = 'Saving...',
   disabled, 
+  isLoading,
   onClick 
 }: TButtonProps) => {
   return (
@@ -23,7 +27,7 @@ const Button = ({
       disabled={disabled}
       onClick={onClick}
     >
-      {label}
+      {isLoading? loadingLabel : label}
     </button>
   );
 };
