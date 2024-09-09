@@ -72,6 +72,7 @@ const NewCardModal = ({isOpen, onClose}: TProps) => {
           />
         <Button 
           type="submit"
+          ariaLabel="Add new card"
           disabled={!isDirty} 
           />
       </form>
