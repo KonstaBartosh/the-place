@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -19,6 +19,8 @@ type TProps = {
 const AvatarModal = ({isOpen, onClose}: TProps) => {
   const MODAL_TITLE = 'Change user picture';
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const { user, setUser } = useContext(UserContext);
 
   const {
@@ -33,8 +35,10 @@ const AvatarModal = ({isOpen, onClose}: TProps) => {
 
   const onSubmit = async (data: TUser) => {
     try {
+      setIsLoading(true);
       const user = await updateAvatar(data as TUser);
       setUser(user);
+      setIsLoading(false);
       onClose();
     }
     catch (error) {
@@ -57,7 +61,10 @@ const AvatarModal = ({isOpen, onClose}: TProps) => {
       isOpen={isOpen}
       onClose={handleClose}
       >
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      style={{ paddingTop: "30px" }}
+      onSubmit={handleSubmit(onSubmit)}
+      >
       <Input
         name="avatar"
         type="url"
@@ -68,6 +75,7 @@ const AvatarModal = ({isOpen, onClose}: TProps) => {
       <Button
         type="submit"
         ariaLabel="Update avatar"
+        isLoading={isLoading}
         disabled={!isDirty} 
         />
     </form>

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -16,9 +16,11 @@ type TProps ={
 }
 
 const NewCardModal = ({isOpen, onClose}: TProps) => {
-  const MODAL_TITLE = 'Add new card';
+  const MODAL_TITLE = 'Post new card';
   const PLACEHOLDER_TITLE = 'Title';
   const PLACEHOLDER_LINK = 'Insert url';
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const { cards, setCards } = useContext(CardsContext);
 
@@ -40,9 +42,10 @@ const NewCardModal = ({isOpen, onClose}: TProps) => {
   const onSubmit = async (data: any)  => {
     try {
       const { name, link } = data;
+      setIsLoading(true);
       const newCard = await postCardApi(name, link);
-      console.log(newCard);
       setCards([newCard, ...cards]);
+      setIsLoading(false);
       handleClose();
     } catch (error) {
       console.error(error);
@@ -55,7 +58,11 @@ const NewCardModal = ({isOpen, onClose}: TProps) => {
       isOpen={isOpen} 
       onClose={handleClose}
       >
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form 
+        style={{ paddingTop: "30px" }}
+        onSubmit={handleSubmit(onSubmit)} 
+        noValidate
+        >
         <Input 
           type="text" 
           name="name" 
@@ -72,7 +79,8 @@ const NewCardModal = ({isOpen, onClose}: TProps) => {
           />
         <Button 
           type="submit"
-          ariaLabel="Add new card"
+          isLoading={isLoading}
+          ariaLabel="Post new card"
           disabled={!isDirty} 
           />
       </form>

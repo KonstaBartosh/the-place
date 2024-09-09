@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -20,6 +20,8 @@ type TProps = {
 const ProfileModal = ({ isOpen, onClose }: TProps) => {
   const MODAL_TITLE = "Change user profile";
 
+  const [isLoading, setIsLoading] = useState(false);
+  
   const { user, setUser } = useContext(UserContext);
 
   const {
@@ -39,9 +41,10 @@ const ProfileModal = ({ isOpen, onClose }: TProps) => {
 
   const onSubmit = async (data: TUser) => {
     try {
+      setIsLoading(true);
       const user = await updateUser(data as TUser);
-      console.log(user)
       setUser(user);
+      setIsLoading(false);
       onClose();
     } catch (error) {
       console.error(error);
@@ -53,8 +56,15 @@ const ProfileModal = ({ isOpen, onClose }: TProps) => {
   }
 
   return (
-    <Modal title={MODAL_TITLE} isOpen={isOpen} onClose={handleClose}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <Modal 
+      title={MODAL_TITLE} 
+      isOpen={isOpen} 
+      onClose={handleClose}
+      >
+      <form
+        style={{ paddingTop: "30px" }}
+        onSubmit={handleSubmit(onSubmit)}
+        >
         <Input
           name="name"
           type="text"
@@ -70,7 +80,8 @@ const ProfileModal = ({ isOpen, onClose }: TProps) => {
           message={errors.about?.message}
           />
         <Button
-          type="submit" 
+          type="submit"
+          isLoading={isLoading} 
           ariaLabel="Update profile"
           disabled={!isDirty} 
           />
