@@ -7,7 +7,7 @@ import Button from "../../../Shared/Components/Button/Button";
 import Input from "../../../Shared/Components/Input/Input";
 
 import { CardsContext } from "../../../Shared/Context/CardsContext";
-import { schema } from "../Validation/Validation";
+import { schema } from "../validation/Validation";
 import { postCardApi } from "../../Profile/Api/ProfileApi";
 
 type TProps ={
