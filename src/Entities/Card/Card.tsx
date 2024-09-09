@@ -5,7 +5,8 @@ import { CardsContext } from "../../Shared/Context/CardsContext";
 import { TCard } from "../../Shared/Types/common";
 import { deleteCardApi, handleLikeApi } from "./Api/CardApi";
 import ImageModal from "./Modals/ImageModal";
-
+import Modal from "../../Shared/Components/Modal/Modal";
+import Button from "../../Shared/Components/Button/Button";
 
 type TProps = {
   card: TCard;
@@ -13,6 +14,7 @@ type TProps = {
 
 const Card = ({ card }: TProps) => {
   const [isShowModal, setShowModal] = useState(false);
+  const [isDeleteModal, setDeleteModal] = useState(false);
 
   const { cards, setCards } = useContext(CardsContext);
 
@@ -68,7 +70,8 @@ const Card = ({ card }: TProps) => {
         <button
           className={styles.deleteButton}
           aria-label="Delete card"
-          onClick={handleDelete} />
+          onClick={() => setDeleteModal(true)}
+          />
       )}
       <div className={styles.description}>
         <h2 className={styles.title}>{name}</h2>
@@ -88,6 +91,18 @@ const Card = ({ card }: TProps) => {
         name={name}
         link={link}
         onClose={() => setShowModal(false)} />
+    <Modal 
+      isOpen={isDeleteModal} 
+      title={'Delete card ?'} 
+      onClose={() => setDeleteModal(false)}
+      >
+      <Button 
+        label="Delete"
+        type="button"
+        ariaLabel="Delete card"
+        onClick={() => handleDelete()}
+        />
+    </Modal>
     </>
   );
 };
