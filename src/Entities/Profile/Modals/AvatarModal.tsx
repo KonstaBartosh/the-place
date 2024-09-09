@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import Modal from "../../../Shared/Components/Modal/Modal";
-import Input from "../../../Shared/Components/UI/Input/Input";
-import Button from "../../../Shared/Components/UI/Button/Button";
+import Input from "../../../Shared/Components/Input/Input";
+import Button from "../../../Shared/Components/Button/Button";
 
 import { UserContext } from "../../../Shared/Context/UserContext";
 import { TUser } from "../../../Shared/Types/common";
@@ -66,7 +66,8 @@ const AvatarModal = ({isOpen, onClose}: TProps) => {
         message={errors.avatar?.message}
       />
       <Button
-        type="submit" 
+        type="submit"
+        ariaLabel="Update avatar"
         disabled={!isDirty} 
         />
     </form>

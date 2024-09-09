@@ -1,20 +1,25 @@
 import styles from "./Card.module.css";
-import { useCallback, useContext, useMemo } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import { UserContext } from "../../Shared/Context/UserContext";
 import { CardsContext } from "../../Shared/Context/CardsContext";
 import { TCard } from "../../Shared/Types/common";
 import { deleteCardApi, handleLikeApi } from "./Api/CardApi";
+import ImageModal from "./Modals/ImageModal";
+
 
 type TProps = {
   card: TCard;
 };
 
 const Card = ({ card }: TProps) => {
+  const [isShowModal, setShowModal] = useState(false);
+
   const { cards, setCards } = useContext(CardsContext);
+
   const { user } = useContext(UserContext);
 
   const { _id, name, link, owner, likes } = card;
-  console.log("Card component rendered");
+
 
   const isUserOwner = useMemo(
     () => owner?._id === user?._id, [owner, user]);
@@ -24,7 +29,6 @@ const Card = ({ card }: TProps) => {
 
   const isLiked = useMemo(
     () => likes?.some((like) => like._id === user?._id), [likes, user]);
-
 
   const handleDelete = useCallback(async () => {
     if (isUserOwner && _id) {
@@ -53,29 +57,38 @@ const Card = ({ card }: TProps) => {
   }`;
 
   return (
+    <>
     <article className={styles.container}>
-      <img className={styles.image} src={link} alt={name} />
+      <img
+        className={styles.image}
+        src={link}
+        alt={name}
+        onClick={() => setShowModal(true)} />
       {isUserOwner && (
-        <button 
+        <button
           className={styles.deleteButton}
           aria-label="Delete card"
-          onClick={handleDelete} 
-          />
+          onClick={handleDelete} />
       )}
       <div className={styles.description}>
         <h2 className={styles.title}>{name}</h2>
         <div className={styles.likeWrapper}>
-          <button 
-            className={likeButtonClass} 
+          <button
+            className={likeButtonClass}
             aria-label={isLiked ? "Unlike card" : "Like card"}
-            onClick={handleLike} 
-            />
+            onClick={handleLike} />
           <span className={styles.likeCounter}>
             {likeCounter}
           </span>
         </div>
       </div>
     </article>
+    <ImageModal
+        isOpen={isShowModal}
+        name={name}
+        link={link}
+        onClose={() => setShowModal(false)} />
+    </>
   );
 };
 

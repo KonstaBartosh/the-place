@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import Modal from "../../../Shared/Components/Modal/Modal";
-import Input from "../../../Shared/Components/UI/Input/Input";
-import Button from "../../../Shared/Components/UI/Button/Button";
+import Input from "../../../Shared/Components/Input/Input";
+import Button from "../../../Shared/Components/Button/Button";
 
 import { UserContext } from "../../../Shared/Context/UserContext";
 import { profileSchema } from "../Validation/Validation";
@@ -71,6 +71,7 @@ const ProfileModal = ({ isOpen, onClose }: TProps) => {
           />
         <Button
           type="submit" 
+          ariaLabel="Update profile"
           disabled={!isDirty} 
           />
       </form>
