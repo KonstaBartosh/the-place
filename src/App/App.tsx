@@ -1,18 +1,20 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Header from '../Shared/Components/Header/Header';
 import Footer from '../Shared/Components/Footer/Footer';
-import Profile from '../Shared/Components/Profile/Profile';
+import Profile from '../Entities/Profile/Profile';
 import CardsLayout from '../Shared/Components/CardsLayout/CardsLayout';
 import { fetchCards, fetchUser } from '../Shared/Api/api';
-import { TCard, TUser } from '../Shared/Types/common';
+import { UserContext } from '../Shared/Context/UserContext';
+import { CardsContext } from '../Shared/Context/CardsContext';
 
 
 function App() {
-  const [cards, setCards] = useState<TCard[]>([]);
-  const [user, setUser] = useState<TUser | null>(null);
+  const { setUser } = useContext(UserContext);
+  const { cards, setCards } = useContext(CardsContext);
+  
   const [isLoading, setIsLoading] = useState(false);
-
+  
   useEffect(() => {
     setIsLoading(true);
     
@@ -39,13 +41,11 @@ function App() {
     getData()
   }, []);
 
-  console.log(user)
-
   return (
     <>
       <Header />
       <main style={{ flexGrow: 1}}>
-        <Profile user={user} isLoading={isLoading} />
+        <Profile isLoading={isLoading} />
         <CardsLayout cards={cards} isLoading={isLoading} />
       </main>
       <Footer />

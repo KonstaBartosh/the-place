@@ -53,6 +53,7 @@
   opacity: 0;
   transition: .3s ease;
   background-color: black;
+  border-radius: 50%;
 }
 
 .imageWrapper:hover .overlay {
@@ -67,7 +68,7 @@
   transform: translate(-50%, -50%);
   width: 25px;
   height: 25px;
-  background-image: url(../../Icons/edit-icon.svg);
+  background-image: url(../../Shared/Icons/edit-icon-light.svg);
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -75,7 +76,7 @@
 .editButton {
   width: 24px;
   height: 24px;
-  background: transparent url('../../Icons/edit-icon-light.svg') center no-repeat;
+  background: transparent url('../../Shared/Icons/edit-icon-light.svg') center no-repeat;
   background-size: 10px 10px;
   border: 1px solid #fff;
   grid-area: button;
@@ -97,7 +98,7 @@
 .addButton {
   width: 150px;
   height: 50px;
-  background: transparent url("../../Icons/add-icon-light.svg") center no-repeat;
+  background: transparent url("../../Shared/Icons/add-icon-light.svg") center no-repeat;
   background-size: 22px;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -200,9 +201,9 @@
     border-color: #213547;
   }
   .addButton {
-    background-image: url("../../Icons/add-icon.svg");
+    background-image: url("../../Shared/Icons/add-icon.svg");
   }
   .editButton {
-    background-image: url("../../Icons/edit-icon.svg");
+    background-image: url("../../Shared/Icons/edit-icon.svg");
   }
 }
