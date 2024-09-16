@@ -1,0 +1,25 @@
+.container {
+  padding-top: 25px;
+  width: 100%;
+  min-height: 100px;
+  font-family: 'Inter', Arial, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  border-bottom: #545454 solid 1px;
+}
+
+.title {
+  margin: 0;
+  font-size: 2em;
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    min-height: 85px;
+  }
+  .container::before {
+    width: calc(100% + 40px);
+  }
+}

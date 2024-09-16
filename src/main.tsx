@@ -1,13 +1,16 @@
-import './index.css'
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import './index.css';
 import App from './App/App';
-import { UserContextProvider } from './Shared/Context/UserContext';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { UserContextProvider } from './App/contexts/userContext';
+import { CardsContextProvider } from './App/contexts/cardsContext';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <UserContextProvider>
-      <App />
-    </UserContextProvider>  
-  </StrictMode>,
-)
+      <CardsContextProvider>
+        <App />
+      </CardsContextProvider>
+    </UserContextProvider>
+  </StrictMode>
+);

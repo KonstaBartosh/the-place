@@ -1,0 +1,25 @@
+.button {
+  height: 36px;
+  width: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: center no-repeat url('../../../../shared/icons/sun.svg');
+  cursor: pointer;
+  display: flex;
+  align-self: flex-start;
+}
+
+.button:hover {
+  background-color: rgb(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+[data-theme='dark'] {
+  .button {
+    background-image: url('../../../../shared/icons/moon.svg');
+    background-color: #242424;
+  }
+  .button:hover {
+    background-color: rgb(255, 255, 255, 0.1);
+  }
+}
