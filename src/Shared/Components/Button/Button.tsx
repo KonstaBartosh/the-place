@@ -1,7 +1,7 @@
-import styles from "./Button.module.css";
+import styles from './Button.module.css';
 
 type TButtonProps = {
-  type: "button" | "submit" | "reset" ;
+  type: 'button' | 'submit' | 'reset';
   ariaLabel: string;
   label?: string;
   disabled?: boolean;
@@ -13,11 +13,11 @@ type TButtonProps = {
 const Button = ({
   type,
   ariaLabel,
-  label = 'Save', 
+  label = 'Save',
   loadingLabel = 'Saving...',
-  disabled, 
+  disabled,
   isLoading,
-  onClick 
+  onClick,
 }: TButtonProps) => {
   return (
     <button
@@ -27,7 +27,7 @@ const Button = ({
       disabled={disabled}
       onClick={onClick}
     >
-      {isLoading? loadingLabel : label}
+      {isLoading ? loadingLabel : label}
     </button>
   );
 };

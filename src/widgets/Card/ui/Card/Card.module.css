@@ -1,0 +1,100 @@
+.container {
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  background-color: whitesmoke;
+}
+
+.title {
+  margin: 0;
+  max-width: 220px;
+  color: #000;
+  font-size: 24px;
+  line-height: 29px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 25px 20px;
+}
+
+.image {
+  height: 282px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.image:hover {
+  cursor: pointer;
+}
+
+.likeButton {
+  width: 21px;
+  height: 18px;
+  background: transparent url('../../../../shared/icons/like-inactive.svg') no-repeat;
+  background-size: 21px 18px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.likeWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.likeButton:hover {
+  opacity: 0.6;
+}
+
+.likeButtonIsActive {
+  background: transparent url('../../../../shared/icons/like-active.svg') no-repeat;
+}
+
+.likeCounter {
+  font-size: 12px;
+  color: #000;
+  margin-top: 5px;
+}
+
+.deleteButton {
+  width: 18px;
+  height: 18px;
+  background: transparent url('../../../../shared/icons/delete-icon.svg') center no-repeat;
+  background-size: 18px 18px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  padding: 0;
+  margin: 0;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.deleteButton:hover {
+  opacity: 0.6;
+}
+
+[data-theme='light'] {
+  .container {
+    border: 1px solid #242424;
+  }
+}

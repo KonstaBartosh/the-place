@@ -1,0 +1,37 @@
+.container {
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  background-color: whitesmoke;
+  border: 1px solid black;
+}
+
+.description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 25px 20px;
+}
+
+.likeButton {
+  width: 21px;
+  height: 18px;
+  background: transparent url('../../Shared/Icons/like-inactive.svg') no-repeat;
+  background-size: 21px 18px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.likeWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
