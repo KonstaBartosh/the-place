@@ -1,6 +1,7 @@
 import './styles/App.css';
 
 import { useContext, useEffect, useState } from 'react';
+import { Routes } from 'react-router-dom';
 
 import { fetchCards, fetchUser } from './api/api';
 import { UserContext } from './contexts/userContext';
@@ -41,6 +42,7 @@ function App() {
     <>
       <Header />
       <main style={{ flexGrow: 1 }}>
+        <Routes></Routes>
         <Profile isLoading={isLoading} />
         <CardsList isLoading={isLoading} />
       </main>
