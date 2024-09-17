@@ -26,9 +26,9 @@ const ImageModal = ({ isOpen, name, link, onClose }: TProps) => {
       window.addEventListener('keydown', handleCloseByEscape);
     }
 
-    if (!isOpen) {
-      return window.removeEventListener('keydown', handleCloseByEscape);
-    }
+    return () => {
+      window.removeEventListener('keydown', handleCloseByEscape);
+    };
   }, [isOpen]);
 
   if (!isOpen) return null;

@@ -10,6 +10,7 @@ type TProps = {
 
 const Modal = ({ isOpen, title, children, onClose }: TProps) => {
   const handleOverlayClose = (evt: SyntheticEvent) => {
+    console.log('click')
     if (evt.target === evt.currentTarget) {
       onClose();
     }
@@ -26,9 +27,10 @@ const Modal = ({ isOpen, title, children, onClose }: TProps) => {
       window.addEventListener('keydown', handleCloseByEscape);
     }
 
-    if (!isOpen) {
-      return window.removeEventListener('keydown', handleCloseByEscape);
+    return () => {
+      window.removeEventListener('keydown', handleCloseByEscape);
     }
+    
   }, [isOpen]);
 
   if (!isOpen) return null;
