@@ -1,6 +1,7 @@
 import styles from './RegisterPage.module.css';
 import { useForm } from 'react-hook-form';
 import { Button, Input } from '../../../shared/components';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
   const {
@@ -39,6 +40,9 @@ const LoginPage = () => {
         ariaLabel="Submit register form"
         disabled={!isDirty}
       />
+      <p className={styles.link}>
+        Already have an account? <Link to="/login">Login</Link>
+      </p>
     </form>
   );
 };

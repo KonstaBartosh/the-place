@@ -9,3 +9,9 @@
   /* minus header and height */
   height: calc(100vh - 280px);
 }
+
+.link {
+  margin-top: 2rem;
+  text-align: center;
+  color: gray;
+}
