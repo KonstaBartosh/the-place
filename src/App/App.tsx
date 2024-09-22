@@ -1,16 +1,15 @@
 import './styles/App.css';
 
 import { useContext, useEffect, useState } from 'react';
-import { Route, Routes, replace, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { fetchCards, fetchUser } from './api/api';
 import { UserContext } from './contexts/userContext';
 import { CardsContext } from './contexts/cardsContext';
 
 import { Header, Footer, Profile } from '../widgets';
-import { CardsList } from '../features';
+import { CardsList, ProtectedRoute } from '../features';
 import { LoginPage, NotFoundPage, RegisterPage } from '../pages';
-import ProtectedRoute from '../features/ProtectedRoute/ProtectedRoute';
 
 function App() {
   const { pathname } = useLocation();
