@@ -1,10 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ThemeToggle } from '../../../features';
-import { useHeaderNavigation } from '../model/useHeaderNavigation';
+import { useHeaderNavButtons } from '../model/useHeaderNavButtons';
 import styles from './Header.module.css';
 
 const Header = (): React.ReactElement => {
-  const { hasToken, handleLogout } = useHeaderNavigation();
+  const { hasToken, handleLogout } = useHeaderNavButtons();
 
   const { pathname } = useLocation();
   const isHomePage = pathname === '/';

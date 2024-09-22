@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export const useHeaderNavigation = () => {
+export const useHeaderNavButtons = () => {
   const [hasToken, setHasToken] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
