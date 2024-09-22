@@ -1,16 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ThemeToggle } from '../../../features';
-
+import { useHeaderNavigation } from '../model/useHeaderNavigation';
 import styles from './Header.module.css';
-import { useTokenStatus } from '../model/useTokenStatus';
-import { useLogout } from '../model/useLogut';
 
 const Header = (): React.ReactElement => {
+  const { hasToken, handleLogout } = useHeaderNavigation();
+
   const { pathname } = useLocation();
   const isHomePage = pathname === '/';
-
-  const { hasToken, setHasToken } = useTokenStatus();
-  const { handleLogout } = useLogout(setHasToken)
 
   return (
     <header className={styles.container}>
