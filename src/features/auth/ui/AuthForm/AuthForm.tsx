@@ -1,4 +1,4 @@
-import styles from './LoginPage.module.css';
+import styles from './AuthForm.module.css';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -20,7 +20,7 @@ const AuthForm = ({
   buttonAriaLabel,
   formType,
 }: TProps) => {
-  
+
   const {
     register,
     handleSubmit,
