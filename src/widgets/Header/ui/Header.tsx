@@ -1,13 +1,16 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ThemeToggle } from '../../../features';
-import { useAuth } from '../model/useAuth';
+
 import styles from './Header.module.css';
+import { useTokenStatus } from '../model/useTokenStatus';
+import { useLogout } from '../model/useLogut';
 
 const Header = (): React.ReactElement => {
   const { pathname } = useLocation();
   const isHomePage = pathname === '/';
 
-  const { isLoggedin, handleLogout } = useAuth();
+  const { hasToken, setHasToken } = useTokenStatus();
+  const { handleLogout } = useLogout(setHasToken)
 
   return (
     <header className={styles.container}>
@@ -15,7 +18,7 @@ const Header = (): React.ReactElement => {
       <div className={styles.options}>
         <ThemeToggle />
         {isHomePage &&
-          (isLoggedin ? (
+          (hasToken ? (
             <button
               className={styles.link}
               onClick={handleLogout}
