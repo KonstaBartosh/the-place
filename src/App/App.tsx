@@ -1,7 +1,7 @@
 import './styles/App.css';
 
 import { useContext, useEffect, useState } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, replace, useLocation } from 'react-router-dom';
 
 import { fetchCards, fetchUser } from './api/api';
 import { UserContext } from './contexts/userContext';
@@ -10,6 +10,7 @@ import { CardsContext } from './contexts/cardsContext';
 import { Header, Footer, Profile } from '../widgets';
 import { CardsList } from '../features';
 import { LoginPage, NotFoundPage, RegisterPage } from '../pages';
+import ProtectedRoute from '../features/ProtectedRoute/ProtectedRoute';
 
 function App() {
   const { pathname } = useLocation();
@@ -44,6 +45,15 @@ function App() {
     getData();
   }, []);
 
+  const HomePage = () => {
+    return (
+      <>
+        <Profile isLoading={isLoading} />
+        <CardsList isLoading={isLoading} />
+      </>
+    );
+  };
+
   return (
     <>
       <Header />
@@ -51,25 +61,22 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              <>
-                <Profile isLoading={isLoading} />
-                <CardsList isLoading={isLoading} />
-              </>
-            }
+            element={<HomePage />}
           />
           <Route
             path="*"
             element={<NotFoundPage />}
           />
-          <Route
-            path="/login"
-            element={<LoginPage />}
-          />
-          <Route
-            path="/register"
-            element={<RegisterPage />}
-          />
+          <Route element={<ProtectedRoute />}>
+            <Route
+              path="/login"
+              element={<LoginPage />}
+            />
+            <Route
+              path="/register"
+              element={<RegisterPage />}
+            />
+          </Route>
         </Routes>
       </main>
       {isHome && <Footer />}
