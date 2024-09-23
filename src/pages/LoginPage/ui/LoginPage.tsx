@@ -1,49 +1,28 @@
-import styles from './LoginPage.module.css';
-import { useForm } from 'react-hook-form';
-import { Button, Input } from '../../../shared/components';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { authorizeApi } from '../../../App/api/api';
+import { AuthForm } from '../../../features';
 
 const LoginPage = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isDirty },
-    reset,
-  } = useForm();
+  const navigate = useNavigate();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onLogin = async (data: any) => {
+    try {
+      const jwt = await authorizeApi(data);
+      navigate('/');
+      localStorage.setItem('token', jwt.token);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <form
-      className={styles.container}
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <h1>Login</h1>
-      <Input
-        register={register}
-        name="email"
-        type="email"
-        placeholder="Email"
-      />
-      <Input
-        register={register}
-        name="password"
-        type="password"
-        placeholder="Password"
-      />
-      <Button
-        type="submit"
-        label="Login"
-        loadingLabel="Logining..."
-        ariaLabel="Submit login form"
-        disabled={!isDirty}
-      />
-      <p className={styles.link}>
-        Don't have an account? <Link to="/register">Register</Link>
-      </p>
-    </form>
+    <AuthForm
+      formTitle="Login"
+      buttonLabel="Login"
+      buttonAriaLabel="Submit login form"
+      onSubmit={onLogin}
+      formType="login"
+    />
   );
 };
 
