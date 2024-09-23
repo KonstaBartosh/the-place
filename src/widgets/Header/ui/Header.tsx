@@ -1,13 +1,29 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ThemeToggle } from '../../../features';
-import { useHeaderNavButtons } from '../model/useHeaderNavButtons';
+import { AuthContext } from '../../../App/contexts';
 import styles from './Header.module.css';
 
 const Header = (): React.ReactElement => {
-  const { hasToken, handleLogout } = useHeaderNavButtons();
+  const { isLoggedin, setLoggedin } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const { pathname } = useLocation();
+
   const isHomePage = pathname === '/';
+
+  // Display logout button only if user is logged in
+  useEffect(() => {
+    const isToken = localStorage.getItem('token');
+    setLoggedin(!!isToken);
+  }, [pathname]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setLoggedin(false);
+    navigate('/login', { replace: true });
+  };
 
   return (
     <header className={styles.container}>
@@ -15,7 +31,7 @@ const Header = (): React.ReactElement => {
       <div className={styles.options}>
         <ThemeToggle />
         {isHomePage &&
-          (hasToken ? (
+          (isLoggedin ? (
             <button
               className={styles.link}
               onClick={handleLogout}
