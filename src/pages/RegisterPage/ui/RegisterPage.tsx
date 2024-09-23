@@ -1,50 +1,31 @@
-import styles from './RegisterPage.module.css';
-import { useForm } from 'react-hook-form';
-import { Button, Input } from '../../../shared/components';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { registerApi } from '../../../App/api/api';
+import { AuthForm } from '../../../features';
 
-const LoginPage = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isDirty },
-    reset,
-  } = useForm();
+const RegisterPage = () => {
+  const navigate = useNavigate();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onRegister = async (data: any) => {
+    try {
+      const newUser = await registerApi(data);
+      navigate('/login');
+      // TODO add toast notification
+      return newUser;
+    } catch (error) {
+      // Handle error message display
+      console.error(error);
+    }
   };
 
   return (
-    <form
-      className={styles.container}
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <h1>Register</h1>
-      <Input
-        register={register}
-        name="email"
-        type="email"
-        placeholder="Email"
-      />
-      <Input
-        register={register}
-        name="password"
-        type="password"
-        placeholder="Password"
-      />
-      <Button
-        type="submit"
-        label="Register"
-        loadingLabel="Submiting..."
-        ariaLabel="Submit register form"
-        disabled={!isDirty}
-      />
-      <p className={styles.link}>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
-    </form>
+    <AuthForm
+      formTitle="Register"
+      buttonLabel="Register"
+      buttonAriaLabel="Submit register form"
+      onSubmit={onRegister}
+      formType="register"
+    />
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
