@@ -1,29 +1,15 @@
-import { useContext, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { ThemeToggle } from '../../../features';
 import { AuthContext } from '../../../App/contexts';
+import { useHandleLogout } from '../model/useHandleLogout';
 import styles from './Header.module.css';
 
 const Header = (): React.ReactElement => {
-  const { isLoggedin, setLoggedin } = useContext(AuthContext);
-
-  const navigate = useNavigate();
-
+  const { isLoggedin } = useContext(AuthContext);
+  const { handleLogout } = useHandleLogout();
   const { pathname } = useLocation();
-
   const isHomePage = pathname === '/';
-
-  // Display logout button only if user is logged in
-  useEffect(() => {
-    const isToken = localStorage.getItem('token');
-    setLoggedin(!!isToken);
-  }, [pathname]);
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setLoggedin(false);
-    navigate('/login', { replace: true });
-  };
 
   return (
     <header className={styles.container}>

@@ -14,8 +14,16 @@ const initialState: TUserContext = {
 // Create a context object for the user data
 export const UserContext = createContext<TUserContext>(initialState);
 
-export const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
+export const UserContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [user, setUser] = useState<TUser | null>(null);
 
-  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
