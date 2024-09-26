@@ -1,4 +1,4 @@
-import { API_CONFIG } from '../constants/constants';
+import { API_CONFIG, AUTH_URL } from '../constants/constants';
 import { TUser } from '../types/common';
 
 export function checkResponse(res: Response) {
@@ -81,6 +81,48 @@ async function updateAvatarApi(user: TUser) {
   return checkResponse(res);
 }
 
+const registerApi = async (data: any) => {
+  const { email, password } = data;
+
+  try {
+    const registeredUser = await fetch(AUTH_URL + '/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const result = await checkResponse(registeredUser);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const authorizeApi = async (data: any) => {
+  const { email, password } = data;
+
+  try {
+    const loggedUser = await fetch(AUTH_URL + '/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const result = await checkResponse(loggedUser);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export {
   fetchCards,
   fetchUser,
@@ -89,4 +131,6 @@ export {
   postCardApi,
   updateUserApi,
   updateAvatarApi,
+  registerApi,
+  authorizeApi,
 };

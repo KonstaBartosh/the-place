@@ -5,3 +5,5 @@ export { default as OpenImageModal } from './openImage/ui/ImageModal/ImageModal'
 export { default as AvatarModal } from './changeUserPicture/ui/AvatarModal/AvatarModal';
 export { default as ProfileModal } from './changeUserProfile/ui/ProfileModal/ProfileModal';
 export { default as ThemeToggle } from './themeToggle/ui/ThemeToggle/ThemeToggle';
+export { default as ProtectedRoute } from './ProtectedRoute/ProtectedRoute';
+export { default as AuthForm } from './auth/ui/AuthForm/AuthForm';
