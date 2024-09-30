@@ -27,3 +27,7 @@
   line-height: 18px;
   align-self: flex-start;
 }
+
+[data-theme='dark'] .input {
+  color: white;
+}
