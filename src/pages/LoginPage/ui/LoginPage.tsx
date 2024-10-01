@@ -1,22 +1,21 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authorizeApi } from '../../../App/api/api';
-import { AuthForm } from '../../../features';
+import toast from 'react-hot-toast';
+import { AuthForm, TAuthData, loginModel } from '../../../features/auth';
 import { AuthContext } from '../../../App/contexts';
 
 const LoginPage = () => {
+  const { loginUser } = loginModel.useLogin();
+  const { setLoggedin } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const { setLoggedin } = useContext(AuthContext);
-
-  const onLogin = async (data: any) => {
+  const handleLogin = async (data: TAuthData) => {
     try {
-      const jwt = await authorizeApi(data);
-      navigate('/');
+      await loginUser(data);
+      navigate('/', { replace: true });
       setLoggedin(true);
-      localStorage.setItem('token', jwt.token);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      toast.error(error.message);
     }
   };
 
@@ -25,7 +24,7 @@ const LoginPage = () => {
       formTitle="Login"
       buttonLabel="Login"
       buttonAriaLabel="Submit login form"
-      onSubmit={onLogin}
+      onSubmit={handleLogin}
       formType="login"
     />
   );
