@@ -1,7 +1,6 @@
 import { TAuthData } from '..';
 import { authApi } from '../api/authApi';
 
-
 export const useRegister = () => {
   const registerUser = async (data: TAuthData) => {
     try {

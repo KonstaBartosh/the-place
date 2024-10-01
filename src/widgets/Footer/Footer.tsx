@@ -5,7 +5,9 @@ const Footer = () => {
 
   return (
     <footer className={styles.container}>
-      <p className={styles.copyright}>&copy; {year} The Place. All rights reserved.</p>
+      <p className={styles.copyright}>
+        &copy; {year} The Place. All rights reserved.
+      </p>
     </footer>
   );
 };

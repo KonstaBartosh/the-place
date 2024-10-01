@@ -33,7 +33,6 @@
   text-decoration: underline;
 }
 
-
 @media screen and (max-width: 480px) {
   .container {
     min-height: 85px;

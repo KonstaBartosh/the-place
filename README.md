@@ -13,6 +13,7 @@ Single page application (SPA) on React. Written with functional components on Ty
 ![The Place](./public/thumbnail.png)
 
 ## Tools used
+
 - Featured slice design architecture
 - Typescript
 - React

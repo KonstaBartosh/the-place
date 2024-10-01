@@ -28,7 +28,10 @@ function App() {
 
     const getData = async () => {
       try {
-        const [userRes, cardsRes] = await Promise.all([fetchUser(), fetchCards()]);
+        const [userRes, cardsRes] = await Promise.all([
+          fetchUser(),
+          fetchCards(),
+        ]);
 
         const user = await userRes.json();
         const cards = await cardsRes.json();

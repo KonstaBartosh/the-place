@@ -1,7 +1,6 @@
 import { TAuthData } from '..';
 import { authApi } from '../api/authApi';
 
-
 export const useLogin = () => {
   const loginUser = async (data: TAuthData) => {
     try {

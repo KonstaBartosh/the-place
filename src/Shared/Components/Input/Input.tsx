@@ -9,7 +9,14 @@ type TInputProps = {
   message?: string | undefined;
 };
 
-const Input = ({ name, type, placeholder, defaultValue, register, message }: TInputProps) => {
+const Input = ({
+  name,
+  type,
+  placeholder,
+  defaultValue,
+  register,
+  message,
+}: TInputProps) => {
   return (
     <>
       <input

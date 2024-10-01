@@ -19,7 +19,10 @@ export const useCardActions = (card: TCard) => {
   const likeCounter = useMemo(() => likes?.length || null, [likes]);
 
   // Define if the current user has liked the card
-  const isLiked = useMemo(() => likes?.some((like) => like._id === user?._id), [likes, user]);
+  const isLiked = useMemo(
+    () => likes?.some((like) => like._id === user?._id),
+    [likes, user]
+  );
 
   const handleDelete = useCallback(async () => {
     if (_id) {
@@ -37,7 +40,9 @@ export const useCardActions = (card: TCard) => {
   const handleLike = useCallback(async () => {
     try {
       const resCard = await handleLikeApi(_id, isLiked);
-      setCards(cards.map((card) => (card._id === resCard._id ? resCard : card)));
+      setCards(
+        cards.map((card) => (card._id === resCard._id ? resCard : card))
+      );
     } catch (error) {
       console.error(error);
     }

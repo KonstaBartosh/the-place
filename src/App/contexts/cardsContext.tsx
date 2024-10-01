@@ -11,8 +11,16 @@ export const CardsContext = createContext<TCardsContext>({
   setCards: () => {},
 });
 
-export const CardsContextProvider = ({ children }: { children: React.ReactNode }) => {
+export const CardsContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [cards, setCards] = useState<TCard[]>([]);
 
-  return <CardsContext.Provider value={{ cards, setCards }}>{children}</CardsContext.Provider>;
+  return (
+    <CardsContext.Provider value={{ cards, setCards }}>
+      {children}
+    </CardsContext.Provider>
+  );
 };
