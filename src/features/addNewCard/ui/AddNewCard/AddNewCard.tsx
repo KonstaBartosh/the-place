@@ -45,7 +45,7 @@ const AddNewCard = ({ isOpen, onClose }: TProps) => {
       setCards([newCard, ...cards]);
       setIsLoading(false);
       handleClose();
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(error);
     }
   };
