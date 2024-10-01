@@ -2,7 +2,7 @@ import './styles/App.css';
 
 import { useContext, useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 import { fetchCards, fetchUser } from './api/api';
 import { UserContext } from './contexts/userContext';
