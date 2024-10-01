@@ -1,10 +1,15 @@
 import { AUTH_URL } from '../../../App/constants/constants';
 import { TAuthData } from '../types/types';
 
-export const loginUserApi = async (data: TAuthData) => {
+type TProps = {
+  data: TAuthData;
+  url: string;
+};
+
+export const authApi = async ({ data, url }: TProps) => {
   const { email, password } = data;
 
-  const response = await fetch(AUTH_URL + '/signin', {
+  const response = await fetch(AUTH_URL + url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
