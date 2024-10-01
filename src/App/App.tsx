@@ -38,7 +38,7 @@ function App() {
 
         setUser(user);
         setCards(cards);
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error('Ошибка!', err);
       } finally {
         setIsLoading(false);
