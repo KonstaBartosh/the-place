@@ -1,12 +1,11 @@
 import styles from './Input.module.css';
-import { UseFormRegister, FieldValues } from 'react-hook-form';
 
 type TInputProps = {
   name: string;
   type: string;
   placeholder?: string;
   defaultValue?: string;
-  register: UseFormRegister<FieldValues>;
+  register: any;
   message?: string | undefined;
 };
 
