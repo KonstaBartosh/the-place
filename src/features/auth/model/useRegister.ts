@@ -1,10 +1,11 @@
 import { TAuthData } from '..';
-import { registerUserApi } from '../api/registerUserApi';
+import { authApi } from '../api/authApi';
+
 
 export const useRegister = () => {
   const registerUser = async (data: TAuthData) => {
     try {
-      const response = await registerUserApi(data);
+      const response = await authApi({ data, url: '/signup' });
 
       if (response.status === 400) {
         throw new Error('User already exists');
