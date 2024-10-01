@@ -16,7 +16,9 @@ export const useLogin = () => {
 
       // If the response is successful, parse the JSON data and return it
       const jwt = await response.json();
+
       localStorage.setItem('token', jwt.token);
+
       return jwt;
     } catch (err) {
       throw new Error(
