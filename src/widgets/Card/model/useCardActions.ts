@@ -1,13 +1,17 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
-import { CardsContext, UserContext } from '../../../App/contexts';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
+import { AuthContext, CardsContext, UserContext } from '../../../App/contexts';
 import { deleteCardApi, handleLikeApi } from '../../../App/api/api';
 import { TCard } from '../../../App/types/common';
 
 export const useCardActions = (card: TCard) => {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const { cards, setCards } = useContext(CardsContext);
-
+  const { isLoggedin } = useContext(AuthContext);
   const { user } = useContext(UserContext);
 
   const { _id, likes, owner } = card;
@@ -38,6 +42,12 @@ export const useCardActions = (card: TCard) => {
   }, [_id, setCards, cards]);
 
   const handleLike = useCallback(async () => {
+    if (!isLoggedin) {
+      toast.error('Please login');
+      navigate('/login');
+      return;
+    }
+
     try {
       const resCard = await handleLikeApi(_id, isLiked);
       setCards(
@@ -45,6 +55,7 @@ export const useCardActions = (card: TCard) => {
       );
     } catch (error) {
       console.error(error);
+      toast.error('Something went wrong. Please try again.');
     }
   }, [_id, isLiked, setCards, cards]);
 
