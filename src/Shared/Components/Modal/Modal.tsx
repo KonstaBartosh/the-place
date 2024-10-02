@@ -1,5 +1,5 @@
-import { SyntheticEvent, useEffect } from 'react';
 import styles from './Modal.module.css';
+import { useModalClose } from '.';
 
 type TProps = {
   isOpen: boolean;
@@ -9,28 +9,7 @@ type TProps = {
 };
 
 const Modal = ({ isOpen, title, children, onClose }: TProps) => {
-  const handleOverlayClose = (evt: SyntheticEvent) => {
-    console.log('click');
-    if (evt.target === evt.currentTarget) {
-      onClose();
-    }
-  };
-
-  const handleCloseByEscape = (evt: KeyboardEvent) => {
-    if (evt.key === 'Escape') {
-      onClose();
-    }
-  };
-
-  useEffect(() => {
-    if (isOpen) {
-      window.addEventListener('keydown', handleCloseByEscape);
-    }
-
-    return () => {
-      window.removeEventListener('keydown', handleCloseByEscape);
-    };
-  }, [isOpen]);
+  const { handleOverlayClose } = useModalClose({ isOpen, onClose });
 
   if (!isOpen) return null;
 
