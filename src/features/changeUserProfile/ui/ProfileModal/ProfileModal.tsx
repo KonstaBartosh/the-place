@@ -48,10 +48,6 @@ const ProfileModal = ({ isOpen, onClose }: TProps) => {
     }
   };
 
-  if (!isOpen) {
-    return null;
-  }
-
   return (
     <Modal
       title={MODAL_TITLE}

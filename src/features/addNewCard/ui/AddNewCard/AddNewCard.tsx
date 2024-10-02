@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
 
 import { Button, Input, Modal } from '../../../../shared/components';
 

@@ -47,10 +47,6 @@ const AvatarModal = ({ isOpen, onClose }: TProps) => {
     onClose();
   };
 
-  if (!isOpen) {
-    return null;
-  }
-
   return (
     <Modal
       title={MODAL_TITLE}
