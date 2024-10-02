@@ -1,5 +1,10 @@
 import styles from './Modal.module.css';
+import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
 import { useModalClose } from '.';
+import { AuthContext } from '../../../App/contexts';
 
 type TProps = {
   isOpen: boolean;
@@ -10,6 +15,15 @@ type TProps = {
 
 const Modal = ({ isOpen, title, children, onClose }: TProps) => {
   const { handleOverlayClose } = useModalClose({ isOpen, onClose });
+  const { isLoggedin } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedin && isOpen) {
+      toast.error('Please login');
+      navigate('/login');
+    }
+  }, [isOpen, isLoggedin, navigate]);
 
   if (!isOpen) return null;
 
