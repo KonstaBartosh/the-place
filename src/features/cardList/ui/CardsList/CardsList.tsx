@@ -1,21 +1,15 @@
 import styles from '../CardsList/CardsList.module.css';
-
 import { useContext } from 'react';
-
 import { TCard } from '../../../../App/types/common';
-
 import { Card, CardSkeleton } from '../../../../widgets';
-import { CardsContext } from '../../../../entities/cards';
-
-type TPops = {
-  isLoading?: boolean;
-};
+import { CardsContext, useCards } from '../../../../entities/cards';
 
 // Generate an array of null values to use as skeletons
 const skeletonList = Array(9).fill(null);
 
-const CardsList = ({ isLoading }: TPops) => {
+const CardsList = () => {
   const { cards } = useContext(CardsContext);
+  const { isLoading } = useCards();
 
   return (
     <div className={styles.container}>
