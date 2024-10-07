@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { UserContext, fetchUser } from '..';
 
-export const useGetUser = () => {
+export const useUser = () => {
   const ERROR_MESSAGE = 'Failed to fetch user';
 
   const [isLoading, setIsLoading] = useState(false);
