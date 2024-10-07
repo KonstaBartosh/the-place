@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 import { useModalClose } from '.';
-import { AuthContext } from '../../../App/contexts';
+import { AuthContext } from '../../../entities/user';
+
 
 type TProps = {
   isOpen: boolean;

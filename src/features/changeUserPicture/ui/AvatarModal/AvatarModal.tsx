@@ -3,10 +3,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Button, Input, Modal } from '../../../../shared/components';
-import { UserContext } from '../../../../App/contexts/userContext';
+
 import { TUser } from '../../../../App/types/common';
 import { avatarSchema } from '../../validation/validation';
 import { updateAvatarApi } from '../../../../App/api/api';
+import { UserContext } from '../../../../entities/user';
 
 type TProps = {
   isOpen: boolean;

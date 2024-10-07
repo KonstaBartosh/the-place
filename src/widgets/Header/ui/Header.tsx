@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ThemeToggle } from '../../../features';
-import { AuthContext } from '../../../App/contexts';
+
 import { useHandleLogout } from '../model/useHandleLogout';
+import { AuthContext } from '../../../entities/user';
 import styles from './Header.module.css';
 
 const Header = (): React.ReactElement => {

@@ -1,10 +1,11 @@
 import styles from '../CardsList/CardsList.module.css';
 
 import { useContext } from 'react';
-import { CardsContext } from '../../../../App/contexts/cardsContext';
+
 import { TCard } from '../../../../App/types/common';
 
 import { Card, CardSkeleton } from '../../../../widgets';
+import { CardsContext } from '../../../../entities/cards';
 
 type TPops = {
   isLoading?: boolean;

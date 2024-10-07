@@ -2,9 +2,10 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-import { AuthContext, CardsContext, UserContext } from '../../../App/contexts';
 import { deleteCardApi, handleLikeApi } from '../../../App/api/api';
 import { TCard } from '../../../App/types/common';
+import { CardsContext } from '../../../entities/cards';
+import { AuthContext, UserContext } from '../../../entities/user';
 
 export const useCardActions = (card: TCard) => {
   const [isLoading, setIsLoading] = useState(false);
