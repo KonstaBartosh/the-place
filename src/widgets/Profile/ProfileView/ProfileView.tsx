@@ -11,13 +11,11 @@ const ProfileView = () => {
   const [addCardOpen, setAddCardOpen] = useState(false);
 
   const { user } = useContext(UserContext);
-  const { isLoggedin } = useContext(AuthContext);
-
   const { name, about, avatar } = user || {};
 
-  const userPic = isLoggedin ? avatar : userIcon;
-  const userName = isLoggedin ? name : 'John Doe';
-  const userBio = isLoggedin ? about : 'Login to fill the bio!';
+  const userPic = user ? avatar : userIcon;
+  const userName = user ? name : 'John Doe';
+  const userBio = user ? about : 'Login to fill the bio!';
 
   return (
     <>
