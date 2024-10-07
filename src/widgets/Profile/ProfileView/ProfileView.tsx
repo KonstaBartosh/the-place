@@ -3,14 +3,9 @@ import { useContext, useState } from 'react';
 import { AuthContext, UserContext } from '../../../App/contexts';
 
 import { ProfileModal, AvatarModal, NewCardModal } from '../../../features';
-import ProfileSkeleton from './ProfileSkeleton';
 import userIcon from '../../../shared/icons/user.png';
 
-type TPops = {
-  isLoading?: boolean;
-};
-
-const ProfileView = ({ isLoading }: TPops) => {
+const ProfileView = () => {
   const [profileIsOpen, setProfileOpen] = useState(false);
   const [userIsOpen, setUserOpen] = useState(false);
   const [addCardOpen, setAddCardOpen] = useState(false);
@@ -18,11 +13,7 @@ const ProfileView = ({ isLoading }: TPops) => {
   const { user } = useContext(UserContext);
   const { isLoggedin } = useContext(AuthContext);
 
-  if (isLoading || !user) {
-    return <ProfileSkeleton />;
-  }
-
-  const { name, about, avatar } = user;
+  const { name, about, avatar } = user || {};
 
   const userPic = isLoggedin ? avatar : userIcon;
   const userName = isLoggedin ? name : 'John Doe';
