@@ -1,6 +1,6 @@
 import styles from './ProfileView.module.css';
 import { useContext, useState } from 'react';
-import { AuthContext, UserContext } from '../../../App/contexts';
+import { UserContext } from '../../../App/contexts';
 
 import { ProfileModal, AvatarModal, NewCardModal } from '../../../features';
 import userIcon from '../../../shared/icons/user.png';
