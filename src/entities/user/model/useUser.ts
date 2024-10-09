@@ -1,10 +1,8 @@
 import { useContext, useState } from 'react';
-import toast from 'react-hot-toast';
 import { UserContext, fetchUser } from '..';
+import { ERR_MESSAGE } from '../../../App/constants/constants';
 
 export const useUser = () => {
-  const ERROR_MESSAGE = 'Failed to fetch user';
-
   const [isLoading, setIsLoading] = useState(false);
 
   const { setUser } = useContext(UserContext);
@@ -16,16 +14,14 @@ export const useUser = () => {
       const response = await fetchUser();
 
       if (response.status !== 200) {
-        toast.error(ERROR_MESSAGE);
-        throw new Error(ERROR_MESSAGE);
+        throw new Error(ERR_MESSAGE.user_failed);
       }
 
       const user = await response.json();
 
       setUser(user);
     } catch (err) {
-      toast.error(ERROR_MESSAGE);
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(ERR_MESSAGE.user_failed);
     } finally {
       setIsLoading(false);
     }
