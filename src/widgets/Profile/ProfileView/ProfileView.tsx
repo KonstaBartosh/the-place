@@ -21,7 +21,7 @@ const ProfileView = () => {
   const { name, about, avatar } = user || {};
 
   useEffect(() => {
-    if (isLoggedin && !user) {
+    if (!isLoggedin) {
       try {
         getUser();
       } catch {

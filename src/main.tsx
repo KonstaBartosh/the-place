@@ -2,10 +2,10 @@ import './index.css';
 import App from './App/App';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { UserContextProvider } from './App/contexts/userContext';
-import { CardsContextProvider } from './App/contexts/cardsContext';
+import { UserContextProvider } from './entities/user/context/userContext';
+import { CardsContextProvider } from './features/cardsList/context/cardsContext';
 import { BrowserRouter } from 'react-router-dom';
-import AuthContextProvider from './App/contexts/authContext';
+import AuthContextProvider from './entities/user/context/authContext';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

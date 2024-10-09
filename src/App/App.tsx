@@ -3,13 +3,13 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { ERR_MESSAGE } from './constants/constants';
-import { useCards } from '../entities/cards';
 import { Header, Footer } from '../widgets';
 import AppRouter from './router/AppRouter';
+import { useCards } from '../features/cardsList';
 
 function App() {
   const { pathname } = useLocation();
-  const isHome = pathname === '/';
+  const isHome = pathname === '/feed';
 
   const { getCards } = useCards();
 

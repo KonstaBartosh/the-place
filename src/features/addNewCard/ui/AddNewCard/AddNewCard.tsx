@@ -3,9 +3,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
 import { Button, Input, Modal } from '../../../../shared/components';
-import { postCardApi } from '../../../../App/api/api';
+
 import { schema } from '../../validation/validation';
-import { CardsContext } from '../../../../entities/cards';
+import { postCardApi } from '../../../../entities/card';
+import { CardsContext } from '../../../cardsList';
+
 
 type TProps = {
   isOpen: boolean;

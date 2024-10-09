@@ -2,12 +2,12 @@ import styles from '../CardsList/CardsList.module.css';
 import { useContext } from 'react';
 import { TCard } from '../../../../App/types/common';
 import { Card, CardSkeleton } from '../../../../widgets';
-import { CardsContext, useCards } from '../../../../entities/cards';
-
-// Generate an array of null values to use as skeletons
-const skeletonList = Array(9).fill(null);
+import { CardsContext, useCards } from '../..';
 
 const CardsList = () => {
+  // Generate an array of null values to use as skeletons
+  const skeletonList = Array(9).fill(null);
+
   const { cards } = useContext(CardsContext);
   const { isLoading } = useCards();
 

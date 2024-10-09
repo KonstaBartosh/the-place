@@ -3,10 +3,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Button, Input, Modal } from '../../../../shared/components';
-import { updateUserApi } from '../../../../App/api/api';
+
 import { UserContext } from '../../../../entities/user/context/userContext';
 import { TUser } from '../../../../App/types/common';
 import { profileSchema } from '../../validation/validation';
+import { updateUserApi } from '../../../../entities/user';
 
 type TProps = {
   isAvatarModal?: boolean;

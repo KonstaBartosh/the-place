@@ -6,8 +6,8 @@ import { Button, Input, Modal } from '../../../../shared/components';
 
 import { TUser } from '../../../../App/types/common';
 import { avatarSchema } from '../../validation/validation';
-import { updateAvatarApi } from '../../../../App/api/api';
-import { UserContext } from '../../../../entities/user';
+
+import { UserContext, updateAvatarApi } from '../../../../entities/user';
 
 type TProps = {
   isOpen: boolean;
