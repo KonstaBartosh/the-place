@@ -3,10 +3,10 @@ import { Profile } from '../../widgets';
 
 const HomePage = () => {
   return (
-    <>
+    <main>
       <Profile />
       <CardsList />
-    </>
+    </main>
   );
 };
 
