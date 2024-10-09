@@ -10,7 +10,7 @@ const Header = (): React.ReactElement => {
   const { isLoggedin } = useContext(AuthContext);
   const { handleLogout } = useHandleLogout();
   const { pathname } = useLocation();
-  const isHomePage = pathname === '/';
+  const isHomePage = pathname === '/feed';
 
   return (
     <header className={styles.container}>

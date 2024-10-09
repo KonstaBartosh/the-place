@@ -1,30 +1,37 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { AuthForm, TAuthData, loginModel } from '../../../features/auth';
-import { AuthContext } from '../../../App/contexts';
+import { AuthForm, TAuthData, loginModel } from '../../features/auth';
+import { AuthContext } from '../../entities/user';
 
 const LoginPage = () => {
   const { loginUser } = loginModel.useLogin();
-  const { setLoggedin } = useContext(AuthContext);
+  const { isLoggedin, setLoggedin } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
-  const handleLogin = async (data: TAuthData) => {
+  const onLogin = async (data: TAuthData) => {
     try {
       await loginUser(data);
-      navigate('/', { replace: true });
+
       setLoggedin(true);
+
+      navigate('/feed', { replace: true });
     } catch (error: any) {
       toast.error(error.message);
     }
   };
+
+  useEffect(() => {
+    if (isLoggedin) onLogin;
+  }, [isLoggedin]);
 
   return (
     <AuthForm
       formTitle="Login"
       buttonLabel="Login"
       buttonAriaLabel="Submit login form"
-      onSubmit={handleLogin}
+      onSubmit={onLogin}
       formType="login"
     />
   );
