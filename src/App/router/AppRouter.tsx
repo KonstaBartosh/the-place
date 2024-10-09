@@ -1,11 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import { ProtectedRoute } from '../../../features';
-import {
-  NotFoundPage,
-  LoginPage,
-  RegisterPage,
-  HomePage,
-} from '../../../pages';
+import { ProtectedRoute } from '../../features';
+import { NotFoundPage, LoginPage, RegisterPage, HomePage } from '../../pages';
 import styles from './AppRouter.module.css';
 
 const AppRouter = () => {
