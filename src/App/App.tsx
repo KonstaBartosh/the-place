@@ -7,7 +7,6 @@ import { useCards } from '../entities/cards';
 import { Header, Footer } from '../widgets';
 import AppRouter from './router/AppRouter';
 
-
 function App() {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
@@ -16,10 +15,12 @@ function App() {
 
   // Loading feed with cards
   useEffect(() => {
-    try {
-      getCards();
-    } catch {
-      toast.error(ERR_MESSAGE.cards_failed);
+    if (isHome) {
+      try {
+        getCards();
+      } catch {
+        toast.error(ERR_MESSAGE.cards_failed);
+      }
     }
   }, []);
 
