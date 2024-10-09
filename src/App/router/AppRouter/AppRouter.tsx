@@ -1,10 +1,16 @@
 import { Routes, Route } from 'react-router-dom';
-import { ProtectedRoute } from '../../features';
-import { NotFoundPage, LoginPage, RegisterPage, HomePage } from '../../pages';
+import { ProtectedRoute } from '../../../features';
+import {
+  NotFoundPage,
+  LoginPage,
+  RegisterPage,
+  HomePage,
+} from '../../../pages';
+import styles from './AppRouter.module.css';
 
 const AppRouter = () => {
   return (
-    <main style={{ flexGrow: 1 }}>
+    <div className={styles.container}>
       <Routes>
         <Route
           path="/feed"
@@ -25,7 +31,7 @@ const AppRouter = () => {
           />
         </Route>
       </Routes>
-    </main>
+    </div>
   );
 };
 
