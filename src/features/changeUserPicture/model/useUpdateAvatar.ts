@@ -23,7 +23,7 @@ export const useUpdateAvatar = ({ onClose }: TProps) => {
       onClose();
     } catch (error) {
       console.error(error);
-      toast.error(ERR_MESSAGE.avatarFailed);
+      toast.error(ERR_MESSAGE.updateUserFailed);
     } finally {
       setIsLoading(false);
     }
