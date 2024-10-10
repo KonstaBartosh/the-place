@@ -1,13 +1,12 @@
-import styles from './ProfileView.module.css';
 import { useContext, useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-
-import { ProfileModal, AvatarModal, NewCardModal } from '../../../features';
-import userIcon from '../../../shared/icons/user.png';
-import { AuthContext, UserContext, useUser } from '../../../entities/user';
 import toast from 'react-hot-toast';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { AuthContext, UserContext, useUser } from '../../../entities/user';
+import { ProfileModal, AvatarModal, NewCardModal } from '../../../features';
 import { ERR_MESSAGE } from '../../../App/constants/constants';
+import userIcon from '../../../shared/Icons/user.png';
+import styles from './ProfileView.module.css';
 
 const ProfileView = () => {
   const [profileIsOpen, setProfileOpen] = useState(false);
