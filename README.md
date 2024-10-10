@@ -10,6 +10,8 @@ Single page application (SPA) on React. Written with functional components on Ty
 - validation of data on the application side
 - user authentication and authorization with JWT token
 
+### One of the main goal was to try FSD aproach and implement it in project
+
 ![The Place](./public/thumbnail.png)
 
 ## Tools used
