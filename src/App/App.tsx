@@ -6,7 +6,6 @@ import { ERR_MESSAGE } from './constants/constants';
 import { Header, Footer } from '../widgets';
 import AppRouter from './router/AppRouter';
 import { useCards } from '../features/cardsList';
-import React from 'react';
 
 function App() {
   const { pathname } = useLocation();
