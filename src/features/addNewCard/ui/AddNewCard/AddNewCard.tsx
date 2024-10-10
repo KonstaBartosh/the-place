@@ -1,13 +1,8 @@
-import { useContext, useState } from 'react';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-
-import { Button, Input, Modal } from '../../../../shared/components';
-
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useAddCard } from '../../model/useAddCard';
 import { schema } from '../../validation/validation';
-import { postCardApi } from '../../../../entities/card';
-import { CardsContext } from '../../../cardsList';
-
+import { Button, Input, Modal } from '../../../../shared/components';
 
 type TProps = {
   isOpen: boolean;
@@ -18,10 +13,6 @@ const AddNewCard = ({ isOpen, onClose }: TProps) => {
   const MODAL_TITLE = 'Post new card';
   const PLACEHOLDER_TITLE = 'Title';
   const PLACEHOLDER_LINK = 'Insert url';
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const { cards, setCards } = useContext(CardsContext);
 
   const {
     register,
@@ -38,18 +29,7 @@ const AddNewCard = ({ isOpen, onClose }: TProps) => {
     reset();
   };
 
-  const onSubmit = async (data: any) => {
-    try {
-      const { name, link } = data;
-      setIsLoading(true);
-      const newCard = await postCardApi(name, link);
-      setCards([newCard, ...cards]);
-      setIsLoading(false);
-      handleClose();
-    } catch (error: unknown) {
-      console.error(error);
-    }
-  };
+  const { isLoading, onSubmit } = useAddCard({ handleClose });
 
   return (
     <Modal
