@@ -9,7 +9,7 @@ import { useCards } from '../features/cardsList';
 
 function App() {
   const { pathname } = useLocation();
-  const isHome = pathname === '/feed';
+  const isHome = pathname === '/';
 
   const { getCards } = useCards();
 

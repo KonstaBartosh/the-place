@@ -8,7 +8,7 @@ const AppRouter = () => {
     <div className={styles.container}>
       <Routes>
         <Route
-          path="/feed"
+          path="/"
           element={<HomePage />}
         />
         <Route

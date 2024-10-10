@@ -16,7 +16,7 @@ const LoginPage = () => {
 
       setLoggedin(true);
 
-      navigate('/feed', { replace: true });
+      navigate('/', { replace: true });
     } catch (error: any) {
       toast.error(error.message);
     }
