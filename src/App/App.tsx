@@ -19,7 +19,7 @@ function App() {
       try {
         getCards();
       } catch {
-        toast.error(ERR_MESSAGE.cards_failed);
+        toast.error(ERR_MESSAGE.cardsFailed);
       }
     }
   }, []);

@@ -10,9 +10,11 @@ export const AUTH_URL = 'https://auth.nomoreparties.co';
 
 export const ERR_MESSAGE = {
   user_failed: 'Failed to fetch user',
-  cards_failed: 'Failed to fetch cards',
+  cardsFailed: 'Failed to fetch cards',
   login_failed: 'Login failed. Please try again.',
   logout_failed: 'Logout failed. Please try again.',
   like_failed: 'Failed to like card',
   unlike_failed: 'Failed to unlike card',
+  updateUserFailed: 'Failed to update. Please try again.',
+  failedToAddCard: 'Failed to add card. Please try again',
 };
