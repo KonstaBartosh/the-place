@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUpdateUser } from '../../model/useUpdateUser';
 import { profileSchema } from '../../validation/validation';
-import { Button, Input, Modal } from '../../../../temp_shared/ui';
+import { Button, Input, Modal } from '../../../../shared/ui';
 
 type TProps = {
   isAvatarModal?: boolean;
