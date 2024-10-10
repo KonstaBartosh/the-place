@@ -1,13 +1,8 @@
-import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
-import { Button, Input, Modal } from '../../../../shared/components';
-
-import { UserContext } from '../../../../entities/user/context/userContext';
-import { TUser } from '../../../../App/types/common';
+import { useUpdateUser } from '../../model/useUpdateUser';
 import { profileSchema } from '../../validation/validation';
-import { updateUserApi } from '../../../../entities/user';
+import { Button, Input, Modal } from '../../../../shared/components';
 
 type TProps = {
   isAvatarModal?: boolean;
@@ -16,11 +11,9 @@ type TProps = {
 };
 
 const ProfileModal = ({ isOpen, onClose }: TProps) => {
-  const MODAL_TITLE = 'Change user profile';
+  const TITLE = 'Change user profile';
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const { user, setUser } = useContext(UserContext);
+  const { isLoading, user, onSubmit } = useUpdateUser({ onClose });
 
   const {
     register,
@@ -37,21 +30,9 @@ const ProfileModal = ({ isOpen, onClose }: TProps) => {
     onClose();
   };
 
-  const onSubmit = async (data: TUser) => {
-    try {
-      setIsLoading(true);
-      const user = await updateUserApi(data as TUser);
-      setUser(user);
-      setIsLoading(false);
-      onClose();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <Modal
-      title={MODAL_TITLE}
+      title={TITLE}
       isOpen={isOpen}
       onClose={handleClose}
     >
