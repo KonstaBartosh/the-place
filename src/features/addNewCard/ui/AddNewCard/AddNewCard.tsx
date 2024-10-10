@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAddCard } from '../../model/useAddCard';
 import { schema } from '../../validation/validation';
-import { Button, Input, Modal } from '../../../../shared/components';
+import { Button, Input, Modal } from '../../../../shared/ui';
 
 type TProps = {
   isOpen: boolean;

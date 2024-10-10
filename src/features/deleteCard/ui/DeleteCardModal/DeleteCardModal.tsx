@@ -1,4 +1,4 @@
-import { Button, Modal } from '../../../../shared/components';
+import { Button, Modal } from '../../../../shared/ui';
 
 type TProps = {
   isOpen: boolean;

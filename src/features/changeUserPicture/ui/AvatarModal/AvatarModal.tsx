@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Input, Modal } from '../../../../shared/components';
+import { Button, Input, Modal } from '../../../../shared/ui';
 import { avatarSchema } from '../../validation/validation';
 import { useUpdateAvatar } from '../../model/useUpdateAvatar';
 

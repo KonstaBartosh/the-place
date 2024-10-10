@@ -1,5 +1,5 @@
 import { useImageModal } from '../../model/useImageModal';
-import styles from '../../../../shared/components/Modal/Modal.module.css';
+import { modalStyles } from '../../../../shared/ui';
 
 type TProps = {
   isOpen: boolean;
@@ -15,20 +15,20 @@ const ImageModal = ({ isOpen, name, link, onClose }: TProps) => {
 
   return (
     <div
-      className={styles.overlay}
+      className={modalStyles.overlay}
       onClick={handleOverlayClose}
     >
-      <div className={styles.imageContainer}>
+      <div className={modalStyles.imageContainer}>
         <button
-          className={styles.buttonClose}
+          className={modalStyles.buttonClose}
           onClick={onClose}
         />
         <img
-          className={styles.image}
+          className={modalStyles.image}
           src={link}
           alt={name}
         />
-        <p className={styles.imageCaption}>{name}</p>
+        <p className={modalStyles.imageCaption}>{name}</p>
       </div>
     </div>
   );
