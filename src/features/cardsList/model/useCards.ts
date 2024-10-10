@@ -15,14 +15,14 @@ export const useCards = () => {
       const response = await fetchCards();
 
       if (response.status !== 200) {
-        throw new Error(ERR_MESSAGE.cards_failed);
+        throw new Error(ERR_MESSAGE.cardsFailed);
       }
 
       const cards = await response.json();
 
       setCards(cards);
     } catch (err) {
-      throw new Error(ERR_MESSAGE.cards_failed);
+      throw new Error(ERR_MESSAGE.cardsFailed);
     } finally {
       setIsLoading(false);
     }
