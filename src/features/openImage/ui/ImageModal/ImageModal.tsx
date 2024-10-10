@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useImageModal } from '../../model/useImageModal';
 import styles from '../../../../shared/components/Modal/Modal.module.css';
 
 type TProps = {
@@ -9,27 +9,7 @@ type TProps = {
 };
 
 const ImageModal = ({ isOpen, name, link, onClose }: TProps) => {
-  const handleOverlayClose = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
-  const handleCloseByEscape = (evt: KeyboardEvent) => {
-    if (evt.key === 'Escape') {
-      onClose();
-    }
-  };
-
-  useEffect(() => {
-    if (isOpen) {
-      window.addEventListener('keydown', handleCloseByEscape);
-    }
-
-    return () => {
-      window.removeEventListener('keydown', handleCloseByEscape);
-    };
-  }, [isOpen]);
+  const { handleOverlayClose } = useImageModal({ isOpen, onClose });
 
   if (!isOpen) return null;
 
