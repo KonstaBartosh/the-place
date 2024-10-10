@@ -1,5 +1,5 @@
 import { useImageModal } from '../../model/useImageModal';
-import { modalStyles } from '../../../../shared/ui';
+import { modalStyles } from '../../../../temp_shared/ui';
 
 type TProps = {
   isOpen: boolean;

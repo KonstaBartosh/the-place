@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { authSchema } from '../../validation/validation';
-import { Input, Button } from '../../../../shared/ui';
+import { Input, Button } from '../../../../temp_shared/ui';
 
 type TProps = {
   formTitle: string;
