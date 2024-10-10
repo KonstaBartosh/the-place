@@ -21,14 +21,14 @@ const ProfileView = () => {
   const { name, about, avatar } = user || {};
 
   useEffect(() => {
-    if (!isLoggedin) {
+    if (isLoggedin) {
       try {
         getUser();
       } catch {
         toast.error(ERR_MESSAGE.user_failed);
       }
     }
-  }, []);
+  }, [isLoggedin]);
 
   return (
     <>
