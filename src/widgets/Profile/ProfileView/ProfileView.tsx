@@ -1,26 +1,34 @@
 import styles from './ProfileView.module.css';
-import { useContext, useState } from 'react';
-import { UserContext } from '../../../App/contexts';
+import { useContext, useEffect, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import { ProfileModal, AvatarModal, NewCardModal } from '../../../features';
-import ProfileSkeleton from './ProfileSkeleton';
+import userIcon from '../../../shared/icons/user.png';
+import { AuthContext, UserContext, useUser } from '../../../entities/user';
+import toast from 'react-hot-toast';
+import { ERR_MESSAGE } from '../../../App/constants/constants';
 
-type TPops = {
-  isLoading?: boolean;
-};
-
-const ProfileView = ({ isLoading }: TPops) => {
+const ProfileView = () => {
   const [profileIsOpen, setProfileOpen] = useState(false);
   const [userIsOpen, setUserOpen] = useState(false);
   const [addCardOpen, setAddCardOpen] = useState(false);
 
   const { user } = useContext(UserContext);
+  const { isLoggedin } = useContext(AuthContext);
+  const { getUser, isLoading } = useUser();
 
-  if (isLoading || !user) {
-    return <ProfileSkeleton />;
-  }
+  const { name, about, avatar } = user || {};
 
-  const { name, about, avatar } = user;
+  useEffect(() => {
+    if (!isLoggedin) {
+      try {
+        getUser();
+      } catch {
+        toast.error(ERR_MESSAGE.user_failed);
+      }
+    }
+  }, []);
 
   return (
     <>
@@ -29,22 +37,46 @@ const ProfileView = ({ isLoading }: TPops) => {
           className={styles.imageWrapper}
           onClick={() => setUserOpen(true)}
         >
-          <img
-            className={styles.image}
-            src={avatar}
-            alt={name}
-          />
+          {!isLoading ? (
+            <img
+              className={styles.image}
+              src={isLoggedin ? avatar : userIcon}
+              alt={isLoggedin ? name : 'John Doe'}
+            />
+          ) : (
+            <Skeleton
+              circle
+              width={120}
+              height={120}
+            />
+          )}
           <div className={styles.overlay}>
             <div className={styles.overlayContent}></div>
           </div>
         </div>
         <div className={styles.dataWrapper}>
-          <h1 className={styles.title}>{name}</h1>
+          {!isLoading ? (
+            <h1 className={styles.title}>{isLoggedin ? name : 'John Doe'}</h1>
+          ) : (
+            <Skeleton
+              width={300}
+              height={50}
+            />
+          )}
           <button
             className={styles.editButton}
             onClick={() => setProfileOpen(true)}
           />
-          <p className={styles.occupation}>{about}</p>
+          {!isLoading ? (
+            <p className={styles.occupation}>
+              {isLoggedin ? about : 'Login to fill the bio!'}
+            </p>
+          ) : (
+            <Skeleton
+              width={200}
+              height={25}
+            />
+          )}
         </div>
         <button
           className={styles.addButton}

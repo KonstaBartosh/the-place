@@ -1,19 +1,18 @@
 import { useNavigate } from 'react-router-dom';
-import { registerApi } from '../../../App/api/api';
-import { AuthForm } from '../../../features';
+import toast from 'react-hot-toast';
+import { AuthForm, TAuthData, registerModel } from '../../../features/auth';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
+  const { registerUser } = registerModel.useRegister();
 
-  const onRegister = async (data: any) => {
+  const onRegister = async (data: TAuthData) => {
     try {
-      const newUser = await registerApi(data);
-      navigate('/login');
-      // TODO add toast notification
-      return newUser;
-    } catch (error) {
-      // Handle error message display
-      console.error(error);
+      await registerUser(data);
+      navigate('/login', { replace: true });
+      toast.success('Registration successful');
+    } catch (error: any) {
+      toast.error(error.message);
     }
   };
 

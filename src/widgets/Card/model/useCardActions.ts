@@ -1,13 +1,17 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
-import { CardsContext, UserContext } from '../../../App/contexts';
-import { deleteCardApi, handleLikeApi } from '../../../App/api/api';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { TCard } from '../../../App/types/common';
+import { AuthContext, UserContext } from '../../../entities/user';
+import { deleteCardApi, handleLikeApi } from '../../../entities/card';
+import { CardsContext } from '../../../features/cardsList';
 
 export const useCardActions = (card: TCard) => {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const { cards, setCards } = useContext(CardsContext);
-
+  const { isLoggedin } = useContext(AuthContext);
   const { user } = useContext(UserContext);
 
   const { _id, likes, owner } = card;
@@ -19,7 +23,10 @@ export const useCardActions = (card: TCard) => {
   const likeCounter = useMemo(() => likes?.length || null, [likes]);
 
   // Define if the current user has liked the card
-  const isLiked = useMemo(() => likes?.some((like) => like._id === user?._id), [likes, user]);
+  const isLiked = useMemo(
+    () => likes?.some((like) => like._id === user?._id),
+    [likes, user]
+  );
 
   const handleDelete = useCallback(async () => {
     if (_id) {
@@ -35,11 +42,20 @@ export const useCardActions = (card: TCard) => {
   }, [_id, setCards, cards]);
 
   const handleLike = useCallback(async () => {
+    if (!isLoggedin) {
+      toast.error('Please login');
+      navigate('/login');
+      return;
+    }
+
     try {
       const resCard = await handleLikeApi(_id, isLiked);
-      setCards(cards.map((card) => (card._id === resCard._id ? resCard : card)));
+      setCards(
+        cards.map((card) => (card._id === resCard._id ? resCard : card))
+      );
     } catch (error) {
       console.error(error);
+      toast.error('Something went wrong. Please try again.');
     }
   }, [_id, isLiked, setCards, cards]);
 

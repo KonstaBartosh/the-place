@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { TUser } from '../types/common';
+import { TUser } from '../../../App/types/common';
 
 type TUserContext = {
   user: TUser | null;

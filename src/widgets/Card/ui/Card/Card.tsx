@@ -13,8 +13,14 @@ const Card = ({ card }: TProps) => {
   const [isShowModal, setShowModal] = useState(false);
   const [isDeleteModal, setDeleteModal] = useState(false);
 
-  const { isLiked, isUserOwner, isLoading, likeCounter, handleLike, handleDelete } =
-    useCardActions(card);
+  const {
+    isLiked,
+    isUserOwner,
+    isLoading,
+    likeCounter,
+    handleLike,
+    handleDelete,
+  } = useCardActions(card);
 
   // Define the class name for the like button based on the current state
   const likeButtonClass = `${styles.likeButton} ${isLiked && styles.likeButtonIsActive}`;

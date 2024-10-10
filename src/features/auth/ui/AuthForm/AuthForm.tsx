@@ -20,7 +20,6 @@ const AuthForm = ({
   buttonAriaLabel,
   formType,
 }: TProps) => {
-
   const {
     register,
     handleSubmit,

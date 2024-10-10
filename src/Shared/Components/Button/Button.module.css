@@ -32,6 +32,15 @@
   cursor: inherit;
 }
 
+[data-theme='dark'] .button {
+  background: #fff;
+  color: #000;
+}
+
+[data-theme='dark'] .button:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
 @media screen and (max-width: 568px) {
   .button {
     font-size: 14px;

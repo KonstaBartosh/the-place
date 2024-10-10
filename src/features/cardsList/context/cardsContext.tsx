@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { TCard } from '../types/common';
+import { TCard } from '../../../App/types/common';
 
 type TCardsContext = {
   cards: TCard[];
@@ -11,8 +11,16 @@ export const CardsContext = createContext<TCardsContext>({
   setCards: () => {},
 });
 
-export const CardsContextProvider = ({ children }: { children: React.ReactNode }) => {
+export const CardsContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [cards, setCards] = useState<TCard[]>([]);
 
-  return <CardsContext.Provider value={{ cards, setCards }}>{children}</CardsContext.Provider>;
+  return (
+    <CardsContext.Provider value={{ cards, setCards }}>
+      {children}
+    </CardsContext.Provider>
+  );
 };

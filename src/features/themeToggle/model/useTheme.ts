@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 
 // Define the theme based on the system preference
 const getSystemTheme = () => {
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light';
 };
 
 export const useTheme = () => {
