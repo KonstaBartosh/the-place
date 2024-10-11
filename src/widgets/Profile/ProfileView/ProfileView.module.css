@@ -68,7 +68,7 @@
   transform: translate(-50%, -50%);
   width: 25px;
   height: 25px;
-  background-image: url('../../../shared/Icons/edit-icon-light.svg');
+  background-image: url('../../../shared/icons/edit-icon-light.svg');
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -99,7 +99,7 @@
 .addButton {
   width: 150px;
   height: 50px;
-  background: transparent url('../../../shared/Icons/add-icon-light.svg') center
+  background: transparent url('../../../shared/icons/add-icon-light.svg') center
     no-repeat;
   background-size: 22px;
   -webkit-border-radius: 2px;
@@ -205,9 +205,9 @@
     border-color: #213547;
   }
   .addButton {
-    background-image: url('../../../shared/Icons/add-icon.svg');
+    background-image: url('../../../shared/icons/add-icon.svg');
   }
   .editButton {
-    background-image: url('../../../shared/Icons/edit-icon.svg');
+    background-image: url('../../../shared/icons/edit-icon.svg');
   }
 }
