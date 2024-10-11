@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ThemeToggle } from '../../../features';
 
 import { useHandleLogout } from '../model/useHandleLogout';
@@ -10,11 +10,19 @@ const Header = (): React.ReactElement => {
   const { isLoggedin } = useContext(AuthContext);
   const { handleLogout } = useHandleLogout();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const isHomePage = pathname === '/';
+
+  const goToHomePage = () => !isHomePage && navigate('/');
 
   return (
     <header className={styles.container}>
-      <h1 className={styles.title}>The Place</h1>
+      <h1
+        className={styles.title}
+        onClick={goToHomePage}
+      >
+        The Place
+      </h1>
       <div className={styles.options}>
         <ThemeToggle />
         {isHomePage &&
