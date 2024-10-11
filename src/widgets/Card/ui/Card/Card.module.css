@@ -53,8 +53,9 @@
 
 .likeWrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   align-items: center;
+  gap: 5px;
 }
 
 .likeButton:hover {
@@ -69,7 +70,6 @@
 .likeCounter {
   font-size: 12px;
   color: #000;
-  margin-top: 5px;
 }
 
 .deleteButton {
