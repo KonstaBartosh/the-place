@@ -21,7 +21,7 @@ const Modal = ({ isOpen, title, children, onClose }: TProps) => {
 
   useEffect(() => {
     if (!isLoggedin && isOpen) {
-      toast.error('Please login');
+      toast('Please login');
       navigate('/login');
     }
   }, [isOpen, isLoggedin, navigate]);
