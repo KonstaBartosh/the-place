@@ -1,5 +1,5 @@
-import styles from '../CardsList/CardsList.module.css';
 import { useContext } from 'react';
+import styles from '../CardsList/CardsList.module.css';
 import { TCard } from '../../../../App/types/common';
 import { Card, CardSkeleton } from '../../../../widgets';
 import { CardsContext, useCards } from '../..';
